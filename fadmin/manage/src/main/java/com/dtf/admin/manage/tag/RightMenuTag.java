@@ -46,7 +46,7 @@ public class RightMenuTag extends TagSupport{
 		}else{
 //			List<Map<String,Object>> menus = (List<Map<String, Object>>) session.getAttribute(Contanst.CURRENT_MENU_KEY);
 			
-			List<SysMenu> menus = staff.menuList;
+			List<SysMenu> menus = staff.getMenuList();
 			
 			htm = objToHtml(menus);
 //			System.out.println(htm);

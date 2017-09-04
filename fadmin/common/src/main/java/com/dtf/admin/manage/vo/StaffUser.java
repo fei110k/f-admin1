@@ -4,12 +4,16 @@ import java.util.List;
 
 public class StaffUser {
 	
-	public SysStaff staff;
+	private SysStaff staff;
 	
-	public List<SysMenu> menuList;
+	//用户所拥有的菜单权限
+	private List<SysMenu> menuList;
+	//用户所拥有的按钮权限
+	private List<SysButton> btnList;
 	
-	public List<SysButton> btnList;
-
+	//用户能访问的子菜单url列表
+	private List<String> menuChildrenList;
+	
 	public SysStaff getStaff() {
 		return staff;
 	}
@@ -33,6 +37,13 @@ public class StaffUser {
 	public void setBtnList(List<SysButton> btnList) {
 		this.btnList = btnList;
 	}
-	
+
+	public List<String> getMenuChildrenList() {
+		return menuChildrenList;
+	}
+
+	public void setMenuChildrenList(List<String> menuChildrenList) {
+		this.menuChildrenList = menuChildrenList;
+	}
 	
 }

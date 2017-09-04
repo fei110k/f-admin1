@@ -68,15 +68,20 @@ public class MainController {
 		StaffUser staffUser = new StaffUser();
 		SysStaff staff = returnVO.getMore();
 		
-		staffUser.staff = staff;
+		staffUser.setStaff(staff);
 		//菜色权限
 		List menuList = mainBo.getUserMenuPrivilege(param);
-		staffUser.menuList = menuList;
+		staffUser.setMenuList(menuList);
+		
+		//菜色子菜单页面URL
+		List menuChildrenList = mainBo.getSysStaffMenuChildren(param);
+		staffUser.setMenuChildrenList(menuChildrenList);
 		
 		//按钮权限
 		List btnList = mainBo.getUserButtonPrivilege(param);
-		staffUser.btnList = menuList;
-		request.getSession().setAttribute("staff_name", staffUser.staff.getStaff_name());
+		staffUser.setBtnList(btnList);
+		
+		request.getSession().setAttribute("staff_name", staffUser.getStaff().getStaff_name());
 		
 		request.getSession().setAttribute(Consts.SESSION_USER_KEY, staffUser);
 		

@@ -37,7 +37,7 @@ public class SysStaffController {
 	@RequestMapping(value="/getStaffUserInfo")
 	public Map getStaffUserInfo(@RequestParam Map param){
 		StaffUser user = SessionUtil.getStaffUser();
-		param.put("staff_id", user.staff.getStaff_id());
+		param.put("staff_id", user.getStaff().getStaff_id());
 		return sysStaffBo.findSysStaffById(param);
 	}
 	
@@ -64,7 +64,7 @@ public class SysStaffController {
 	@RequestMapping(value="/updateSysStaffPassword")
 	public ReturnVO updateSysStaffPassword(@RequestParam Map param){
 		ReturnVO returnVO = new ReturnVO();
-		String password = SessionUtil.getStaffUser().staff.getPassword();
+		String password = SessionUtil.getStaffUser().getStaff().getPassword();
 		String old_password = MapUtils.getString(param, "old_password");
 		old_password = MD5Utils.MD5(old_password);
 		if (!password.equals(old_password)) {
@@ -72,7 +72,7 @@ public class SysStaffController {
 			returnVO.setMsg("原密码输入错误，请重新输入！");
 			return returnVO;
 		}
-		param.put("staff_id", SessionUtil.getStaffUser().staff.getStaff_id());
+		param.put("staff_id", SessionUtil.getStaffUser().getStaff().getStaff_id());
 		param.put("password", MD5Utils.MD5(MapUtils.getString(param, "new_password")));
 		return sysStaffBo.updateSysStaffPassword(param);
 	}

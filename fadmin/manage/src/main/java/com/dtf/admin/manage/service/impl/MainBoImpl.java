@@ -64,6 +64,13 @@ public class MainBoImpl implements MainBo{
 	}
 	
 	@Override
+	public List getSysStaffMenuChildren(Map param){
+		String staff_code = MapUtils.getString(param, "staff_code");
+		List list = daoUtils.getSqlSessionTemplate().selectList("Main.findSysStaffMenuChildren",staff_code);
+		return list;
+	}
+	
+	@Override
 	public List getUserButtonPrivilege(Map param){
 		String staff_code = MapUtils.getString(param, "staff_code");
 		List list = daoUtils.getSqlSessionTemplate().selectList("Main.findSysStaffButton",staff_code);

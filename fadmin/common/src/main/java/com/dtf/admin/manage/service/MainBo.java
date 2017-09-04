@@ -28,4 +28,11 @@ public interface MainBo {
 	 * @return
 	 */
 	public List getUserButtonPrivilege(Map param);
+	
+	/**
+	 * 获取用户子菜单权限
+	 * @param param
+	 * @return
+	 */
+	public List getSysStaffMenuChildren(Map param);
 }

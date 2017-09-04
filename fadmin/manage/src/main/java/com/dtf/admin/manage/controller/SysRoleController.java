@@ -43,7 +43,7 @@ public class SysRoleController {
 	@ResponseBody
 	@RequestMapping(value="/insertSysRole")
 	public ReturnVO insertSysRole(@RequestParam Map param){
-		String staff_id = SessionUtil.getStaffUser().staff.getStaff_id();
+		String staff_id = SessionUtil.getStaffUser().getStaff().getStaff_id();
 		param.put("status_staff_id", staff_id);
 		return sysRoleBo.insertSysRole(param);
 	}
@@ -51,7 +51,7 @@ public class SysRoleController {
 	@ResponseBody
 	@RequestMapping(value="/updateSysRoleById")
 	public ReturnVO updateSysRoleById(@RequestParam Map param){
-		String staff_id = SessionUtil.getStaffUser().staff.getStaff_id();
+		String staff_id = SessionUtil.getStaffUser().getStaff().getStaff_id();
 		param.put("status_staff_id", staff_id);
 		return sysRoleBo.updateSysRoleById(param);
 	}

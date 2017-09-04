@@ -7,6 +7,7 @@
 	<session-config>
 		<session-timeout>30</session-timeout>
 	</session-config>
+  	
 	
 	<!-- 设置通过spirng请求的字符格式，默认为UTF-8， 当然，此处只能过滤Post， 如果要解决get请求中的中文字符乱码，请在tomcat的servlet.xml的商品配置处，添加配置URIEncoding="UTF-8" -->
 	<filter>
@@ -21,12 +22,38 @@
 			<param-value>true</param-value>
 		</init-param>
 	</filter>
-	
-	<!-- Spring的监听配置 -->
 	<filter-mapping>
 		<filter-name>springCharacterEncodingFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
+	
+	<!-- 登录及权限校验过滤器 -->
+	<filter>
+		<filter-name>SessionFilter</filter-name>
+		<filter-class>com.dtf.admin.manage.filter.SessionFilter</filter-class>
+		<init-param>
+			<param-name>logonStrings</param-name><!-- 对登录页面不进行过滤 -->
+			<param-value>/manage/login.jsp;/login.do;/Verification.do</param-value>
+		</init-param>
+		<init-param>
+			<param-name>includeStrings</param-name><!-- 只对指定过滤参数后缀进行过滤 -->
+			<param-value>.do;.jsp</param-value>
+		</init-param>
+		<init-param>
+			<param-name>redirectPath</param-name><!-- 未通过跳转到登录界面 -->
+			<param-value>/manage/403.html</param-value>
+		</init-param>
+		<init-param>
+			<param-name>disabletestfilter</param-name><!-- Y:过滤无效 -->
+			<param-value>N</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>SessionFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
+	<!-- Spring的监听配置 -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>classpath:spring/applicationContext.xml</param-value>

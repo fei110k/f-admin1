@@ -9,6 +9,7 @@ import com.dtf.admin.common.log.Log;
 import com.dtf.admin.common.utils.DateUtil;
 /**
  * 此类为定时任务quartz示例类，可直接复制此类进行开发
+ * 必须放在service层来处理，因为quartz集群能够运行的条件就是能够连接到数据库
  * @author fei
  *
  */
