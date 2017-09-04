@@ -1,0 +1,69 @@
+/* 分页插件样式自定义 开始 */
+.pagination_parent{
+	padding: 10px 0px;
+}
+.pagination>li:first-child>a, .pagination>li:first-child>span {
+    margin-left: 0;
+    border-bottom-left-radius: 4px;
+    border-top-left-radius: 4px;
+}
+
+.pagination>.disabled>span, .pagination>.disabled>span:hover, .pagination>.disabled>span:focus, .pagination>.disabled>a, .pagination>.disabled>a:hover, .pagination>.disabled>a:focus {
+    color: #999;
+    background-color: #fff;
+    border-color: #ddd;
+    cursor: not-allowed;
+}
+.pagination>li{
+	float: left;
+}
+.pagination>li>a, .pagination>li>span {
+    position: relative;
+    float: left;
+    padding: 6px 12px;
+    line-height: 1.42857143;
+    text-decoration: none;
+    color: #428bca;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    margin-left: -1px;
+}
+
+.pagination{height: 28px;list-style: none;float: right;}
+.pagination>li>a {
+	margin-right: 5px;
+	border-radius: 2px;
+	background: #fff;
+	color: #333;
+	border-color: #ccc;
+	padding: 3px 6px;
+    min-width: 29px;
+    text-align: center;
+    font-size: 13px;
+}
+
+.pagination>li>a:hover,.pagination>li>a:focus {
+	color: #fff;
+	background: #428bca;
+	border-color: #357ebd;
+}
+
+.pagination>.active>a,.pagination>.active>a:hover,.pagination>.active>a:focus {
+	color: #fff;
+	background: #428bca;
+	border-color: #357ebd;
+}
+/* 隐藏页码，只保留上一页下一页 */
+/* .pagination .page{
+	display: none;
+} */
+/* 分页插件样式自定义 结束 */
+
+/* 解决ztree下边有时候会多出一条白线的bug */
+.ztree .line{border-top: solid 0px #eee;}
+
+/********select下拉框disabled样式*********/
+.select:disabled{background: #ebebe4}
+.select-box.select-disabled{background: #ebebe4}
+
+.no-padding{padding: 0px;}

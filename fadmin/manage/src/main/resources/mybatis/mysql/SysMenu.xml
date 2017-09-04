@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="SysMenu">
+	
+	<select id="findMenuBtns" resultType="Map" parameterType="Map">
+		select * from 
+		(select a.menu_id id,a.parent_id pid,a.menu_name name,'menu' type,a.sort_order,
+			status,menu_url,class_style,null btn_code
+			from sys_menu a order by a.sort_order) sys_menu 
+		union 
+		select b.btn_id id,b.menu_id pid,b.btn_name name,'btn' type,0 sort_order,
+		    status,null menu_url,null class_style,btn_code
+		     from sys_button b 
+	</select>
+	
+	<!-- 根据条件查询 -->
+	<select id="findSysMenu" resultType="Map" parameterType="Map">
+		SELECT a.*,(SELECT b.menu_name FROM sys_menu b WHERE b.menu_id = a.parent_id) parent_name FROM sys_menu a 
+		where 1=1
+		<if test="menu_id != null and menu_id != '' ">
+			and a.menu_id=#{menu_id} 
+		</if>
+		<if test="menu_name != null and menu_name != '' ">
+			and a.menu_name like '%${menu_name}%'
+		</if>
+	</select>
+	
+	<!-- 根据条件修改 -->
+	<update id="updateSysMenuByConn" parameterType="Map">
+		UPDATE 
+		  sys_menu 
+		SET
+		  menu_name = #{menu_name},
+		  menu_url = #{menu_url},
+		  menu_path = #{menu_path},
+		  parent_id = #{parent_id},
+		  status = #{status},
+		  sort_order = #{sort_order},
+		  class_style = #{class_style},
+		  menu_level = #{menu_level} 
+		WHERE menu_id = #{menu_id}
+	</update>
+	
+	<insert id="insertSysMenu" parameterType="Map">
+		INSERT INTO sys_menu (
+			  menu_id,
+			  menu_name,
+			  menu_url,
+			  menu_path,
+			  parent_id,
+			  status,
+			  sort_order,
+			  class_style,
+			  menu_level
+			) 
+			VALUES
+			  (
+			    #{menu_id},
+			    #{menu_name},
+			    #{menu_url},
+			    #{menu_path},
+			    #{parent_id},
+			    #{status},
+			    #{sort_order},
+			    #{class_style},
+			    #{menu_level}
+			  )
+	</insert>
+	
+	<!-- 根据ID删除菜单，及菜单下边的子菜单 -->
+	<delete id="deleteSysMenuById" parameterType="Map">
+	DELETE FROM sys_menu WHERE menu_id IN(
+		select menu_id from (
+			SELECT menu_id FROM sys_menu a WHERE a.menu_path LIKE CONCAT((SELECT
+			menu_path FROM sys_menu a WHERE a.menu_id = #{menu_id} ),'%')
+		) aaa
+	)
+	</delete>
+	
+	<!-- 批量删除 -->
+	<delete id="deleteSysMenuByIds" parameterType="Map">
+		DELETE FROM sys_menu WHERE menu_id in (${menu_ids})
+	</delete>
+	
+	<!-- 批量删除 -->
+	<delete id="deleteSysMenuChildrenById" parameterType="Map">
+		DELETE FROM sys_menu_children WHERE menu_id = #{menu_id}
+	</delete>
+	
+	<!-- 批量删除 -->
+	<insert id="insertSysMenuChildrenById" parameterType="Map">
+		insert into sys_menu_children (menu_id, menu_children_url) 
+		values
+		  (#{menu_id}, #{menu_children_url}) 
+	</insert>
+	
+	<select id="findSysMenuChildren" resultType="Map" parameterType="Map">
+		select menu_children_url from sys_menu_children where menu_id = #{menu_id}
+	</select>
+</mapper>

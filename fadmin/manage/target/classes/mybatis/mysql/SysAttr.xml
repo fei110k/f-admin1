@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="SysAttr">
+	
+	<!-- 根据条件查询 -->
+	<select id="findSysAttr" resultType="Map" parameterType="Map">
+		SELECT * FROM sys_attr where 1=1
+		<if test="attr_name != null and attr_name != '' ">
+			and (attr_name like #{attr_name} or attr_code like #{attr_name})
+		</if>
+		<if test="attr_id != null and attr_id != '' ">
+			and attr_id = #{attr_id}
+		</if>
+		<if test="attr_code != null and attr_code != '' ">
+			and attr_code = #{attr_code}
+		</if>
+	</select>
+	
+	<!-- 根据条件修改 -->
+	<update id="updateSysAttrByConn" parameterType="Map">
+		UPDATE 
+		  sys_attr 
+		SET
+		  attr_code = #{attr_code},
+		  struts = #{struts},
+		  attr_name = #{attr_name},
+		  create_date = #{create_date} 
+		WHERE attr_id = #{attr_id} 
+	</update>
+	
+	<insert id="insertSysAttr" parameterType="Map">
+		INSERT INTO sys_attr (
+		  attr_id,
+		  attr_code,
+		  struts,
+		  attr_name,
+		  create_date
+		) 
+		VALUES
+		  (
+		    #{attr_id},
+		    #{attr_code},
+		    #{struts},
+		    #{attr_name},
+		    #{create_date}
+		  ) 
+	</insert>
+	
+	<!-- 根据ID删除 -->
+	<delete id="deleteSysAttrById" parameterType="Map">
+		DELETE FROM sys_attr WHERE attr_id = #{attr_id}
+	</delete>
+	
+	<!-- 根据attr_id查询所有下拉列表 -->
+	<select id="findSysAttrValue" resultType="Map" parameterType="Map">
+		SELECT a.* FROM sys_attr_value a WHERE a.attr_id = #{attr_id}
+	</select>
+	
+	<!-- 根据attr_id查询所有下拉列表 -->
+	<select id="insertSysAttrValue" resultType="Map" parameterType="Map">
+		INSERT INTO sys_attr_value (
+		  attr_id,
+		  attr_value,
+		  attr_value_name
+		) 
+		VALUES
+		  (
+		    #{attr_id},
+		    #{attr_value},
+		    #{attr_value_name}
+		  ) 
+	</select>
+	
+	<!-- 根据attr_id查询所有下拉列表 -->
+	<select id="deleteSysAttrValue" resultType="Map" parameterType="Map">
+		delete FROM sys_attr_value WHERE attr_id = #{attr_id}
+	</select>
+</mapper>

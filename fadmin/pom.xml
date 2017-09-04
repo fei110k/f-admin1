@@ -1,0 +1,32 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.dtf.admin</groupId>
+  <artifactId>fadmin</artifactId>
+  <version>1.0.0</version>
+  <packaging>pom</packaging>
+  <modules>
+  	<module>common</module>
+  	<module>manage2</module>
+  	<module>manage</module>
+  </modules>
+  
+  <properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<java.version>1.7</java.version>
+
+		<!-- bean工具类版本号 -->
+		<commons.beanutils.version>1.9.2</commons.beanutils.version>
+		<!-- 分布式定时任务框架quartz版本号 -->
+		<quartz.version>2.2.3</quartz.version>
+
+		<!-- 本地项目common的版本号 -->
+		<com.dtf.admin.common.version>1.0.0</com.dtf.admin.common.version>
+
+		<!-- dubbo的spring boot依赖包 -->
+		<dubbo-spring-boot>1.0.0</dubbo-spring-boot>
+		<!-- spring,spring mvc 的版本 -->
+		<spring.version>4.0.5.RELEASE</spring.version>
+	</properties>
+  
+</project>
