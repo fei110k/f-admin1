@@ -1,23 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- 用于登录验证码的配置 -->
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
-	xmlns:c="http://www.springframework.org/schema/c" xmlns:cache="http://www.springframework.org/schema/cache"
-	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:jdbc="http://www.springframework.org/schema/jdbc" xmlns:jee="http://www.springframework.org/schema/jee"
-	xmlns:lang="http://www.springframework.org/schema/lang" xmlns:mvc="http://www.springframework.org/schema/mvc"
-	xmlns:p="http://www.springframework.org/schema/p" xmlns:task="http://www.springframework.org/schema/task"
-	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:util="http://www.springframework.org/schema/util"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
-		http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd
-		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
-		http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd
-		http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd
-		http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang.xsd
-		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
-		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd
-		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
-		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd"
 	default-autowire="byName">
 	
 	<bean id="defaultKaptcha" class="com.google.code.kaptcha.impl.DefaultKaptcha">
@@ -52,7 +38,7 @@
 						<!-- 
 							图片样式：
 								默认是水纹 com.google.code.kaptcha.impl.FishEyeGimpy
-								水纹与鱼眼较好识别，阴影比较难被人眼识别，实在不行，就用中文验证码
+								水纹与鱼眼较好识别，阴影比较难被人眼识别，如果还要加大难度可以试试中文验证码
 							水纹com.google.code.kaptcha.impl.WaterRipple
 							鱼眼com.google.code.kaptcha.impl.FishEyeGimpy
 							阴影com.google.code.kaptcha.impl.ShadowGimpy
