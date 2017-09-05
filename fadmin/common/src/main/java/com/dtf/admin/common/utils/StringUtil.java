@@ -306,5 +306,20 @@ public class StringUtil{
         }
         return sb.toString();
     }
-
+    
+    /**
+	 * 判断数据组是否存在字符串
+	 * @param container 字符串
+	 * @param arr	数组
+	 * @return
+	 */
+	public static boolean isContains(String container, String[] arr) {
+        boolean result = false;
+        for (int i = 0; i < arr.length; i++) {
+            if (container.indexOf(arr[i]) != -1) {
+                return true;
+            }
+        }
+        return result;
+    }
 }

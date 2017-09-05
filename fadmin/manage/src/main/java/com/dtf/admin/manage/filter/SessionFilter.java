@@ -29,16 +29,6 @@ public class SessionFilter implements Filter {
         this.config = null;
     }
     
-    public static boolean isContains(String container, String[] regx) {
-        boolean result = false;
-        for (int i = 0; i < regx.length; i++) {
-            if (container.indexOf(regx[i]) != -1) {
-                return true;
-            }
-        }
-        return result;
-    }
-    
     /**
      * 检查用户是否含有访问的菜单权限
      * @param url	访问的菜单URL
@@ -91,12 +81,12 @@ public class SessionFilter implements Filter {
         String[] logonList = logonStrings.split(";");
         String[] includeList = includeStrings.split(";");
 
-        if (!this.isContains(hrequest.getRequestURI(), includeList)) {// 只对指定过滤参数后缀进行过滤
+        if (!StringUtil.isContains(hrequest.getRequestURI(), includeList)) {// 只对指定过滤参数后缀进行过滤
             chain.doFilter(request, response);
             return;
         }
 
-        if (this.isContains(hrequest.getRequestURI(), logonList)) {// 对登录页面不进行过滤
+        if (StringUtil.isContains(hrequest.getRequestURI(), logonList)) {// 对登录页面不进行过滤
             chain.doFilter(request, response);
             return;
         }

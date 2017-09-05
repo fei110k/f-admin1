@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.dtf.admin.common.ReturnVO;
 import com.dtf.admin.common.utils.MapUtils;
+import com.dtf.admin.common.utils.StringUtil;
 import com.dtf.admin.common.utils.UUIDGenerator;
 import com.dtf.admin.common.utils.mybatis.DaoUtils;
 import com.dtf.admin.manage.service.SysMenuBo;
@@ -121,6 +122,12 @@ public class SysMenuBoImpl implements SysMenuBo{
 	@Transactional
 	public ReturnVO updateSysMenuByConn(Map param) {
 		ReturnVO req = new ReturnVO();
+		
+		//页面防XSS攻击特殊处理
+		String class_style = MapUtils.getString(param, "class_style");
+		class_style = class_style.replaceAll("＆", "&");
+		param.put("class_style", class_style);
+		
 		int update_count = daoUtils.getSqlSessionTemplate().update("SysMenu.updateSysMenuByConn", param);
 		
 		daoUtils.getSqlSessionTemplate().delete("SysMenu.deleteSysMenuChildrenById", param);
@@ -130,6 +137,9 @@ public class SysMenuBoImpl implements SysMenuBo{
 		
 		String[] urls = menu_children_urls.split(",");
 		for (int i = 0; i < urls.length; i++) {
+			if (StringUtil.isEmpty(urls[i])) {
+				continue;
+			}
 			Map m = new HashMap();
 			m.put("menu_children_url", urls[i]);
 			m.put("menu_id", menu_id);

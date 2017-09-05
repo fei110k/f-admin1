@@ -25,12 +25,14 @@
 		<span class="va-m"> 403</span>
 	</p>
 	<p class="error-description">不好意思，您没有访问该页面的权限~</p>
-	<p class="error-info">您可以：
+	
+	<p class="error-info" id="nologin" style="display: none;">您可以：
 		<a href="javascript:;" onclick="history.go(-1)" class="c-primary">&lt; 返回上一页</a>
 		<span class="ml-20">|</span>
 		<a href="javascript:void(0)" onclick="goLogin()" class="c-primary ml-20">登录 &gt;</a>
 	</p>
 </section>
+<script type="text/javascript" src="/public/lib/H-ui.admin/lib/jquery/1.9.1/jquery.min.js"></script>
 <script type="text/javascript">
 
 function goLogin(){
@@ -52,9 +54,9 @@ window.getUrlParam = function(name) {
     } 
 }
 if(getUrlParam("type") == "nologin"){
-	alert("未登录");
+	$("#nologin").show();
 }else if(getUrlParam("type") == "nopri"){
-	alert("没有权限访问页面");
+	//alert("没有权限访问页面");
 }
 </script>
 </body>
