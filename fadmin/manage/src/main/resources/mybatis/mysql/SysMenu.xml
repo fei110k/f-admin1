@@ -21,9 +21,18 @@
 			and a.menu_id=#{menu_id} 
 		</if>
 		<if test="menu_name != null and menu_name != '' ">
-			and a.menu_name like '%${menu_name}%'
+			and a.menu_name like #{menu_name}
 		</if>
 	</select>
+	
+	<!-- 根据条件修改 -->
+	<update id="menuUpdateParent" parameterType="Map">
+		UPDATE 
+		  sys_menu 
+		SET
+		  parent_id = #{parent_id}
+		WHERE menu_id = #{menu_id}
+	</update>
 	
 	<!-- 根据条件修改 -->
 	<update id="updateSysMenuByConn" parameterType="Map">

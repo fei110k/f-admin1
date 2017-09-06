@@ -22,4 +22,6 @@ public interface SysMenuBo {
 
 	public Map findSysMenuById(Map param);
 	
+	public ReturnVO menuUpdateParent(Map param);
+	
 }

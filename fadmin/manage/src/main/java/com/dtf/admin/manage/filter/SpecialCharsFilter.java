@@ -13,11 +13,12 @@ import javax.servlet.http.HttpServletRequest;
 import com.dtf.admin.common.utils.StringUtil;
 
 /**
- * 防止XSS攻击
+ * 特殊字符处理，过滤
+ * 防止XSS攻击，防止SQL注入攻击
  * @author fei
  *
  */
-public class XSSFilter implements Filter {
+public class SpecialCharsFilter implements Filter {
 	
 	public FilterConfig config;
 	
@@ -44,7 +45,7 @@ public class XSSFilter implements Filter {
             return;
         }
 		//使用自定的RequestWrapper定义获取参数时要添加的过滤
-		chain.doFilter(new XSSRequestWrapper((HttpServletRequest) request), response);
+		chain.doFilter(new SpecialCharsRequestWrapper((HttpServletRequest) request), response);
 	}
 
 	

@@ -37,6 +37,12 @@ public class SysMenuController {
 	}
 	
 	@ResponseBody
+	@RequestMapping(value="/menuUpdateParent")
+	public ReturnVO menuUpdateParent(@RequestParam Map param){
+		return sysMenuBo.menuUpdateParent(param);
+	}
+	
+	@ResponseBody
 	@RequestMapping(value="/findSysMenuById")
 	public Map findSysMenuById(@RequestParam Map param){
 		return sysMenuBo.findSysMenuById(param);

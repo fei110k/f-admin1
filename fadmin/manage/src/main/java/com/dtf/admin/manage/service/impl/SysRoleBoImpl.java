@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import com.alibaba.fastjson.JSON;
 import com.dtf.admin.common.Consts;
 import com.dtf.admin.common.ReturnVO;
+import com.dtf.admin.common.utils.ListUtils;
 import com.dtf.admin.common.utils.MapUtils;
 import com.dtf.admin.common.utils.UUIDGenerator;
 import com.dtf.admin.common.utils.mybatis.DaoUtils;
@@ -29,12 +30,14 @@ public class SysRoleBoImpl implements SysRoleBo{
 	@Override
 	public Map findSysRoleById(Map param) {
 		// TODO Auto-generated method stub
-		return daoUtils.getSqlSessionTemplate().selectOne("SysRole.findSysRole", param);
+		return daoUtils.getSqlSessionTemplate().selectOne("SysRole.findSysRoleById", param);
 	}
 	
 	@Override
 	public PageInfo findSysRole(Map param) {
 		// TODO Auto-generated method stub
+		String role_name = MapUtils.getString(param, "role_name");
+		param.put("role_name", "%"+role_name+"%");
 		return daoUtils.selectPage("SysRole.findSysRole", param);
 	}
 	
@@ -42,8 +45,8 @@ public class SysRoleBoImpl implements SysRoleBo{
 	public ReturnVO insertSysRole(Map param) {
 		ReturnVO req = new ReturnVO();
 		
-		Map m = daoUtils.getSqlSessionTemplate().selectOne("SysRole.findSysRoleByName", param);
-		if (MapUtils.isEmpty(m)) {
+		List list = daoUtils.getSqlSessionTemplate().selectList("SysRole.findSysRoleByName", param);
+		if (ListUtils.isNotEmpty(list)) {
 			req.setCode("9999");
 			req.setMsg("角色名称重复，请修改角色名称后再重新提交！");
 			return req;
@@ -60,9 +63,10 @@ public class SysRoleBoImpl implements SysRoleBo{
 	public ReturnVO updateSysRoleById(Map param) {
 		ReturnVO req = new ReturnVO();
 		
-		Map m = daoUtils.getSqlSessionTemplate().selectOne("SysRole.findSysRoleByName", param);
-		if (MapUtils.isEmpty(m) 
-				&& !MapUtils.getString(param, "role_name").equals(MapUtils.getString(m, "role_name"))) {
+		List<Map> list = daoUtils.getSqlSessionTemplate().selectList("SysRole.findSysRoleByName", param);
+		if ((ListUtils.isNotEmpty(list) && list.size() > 1 )||
+				(ListUtils.isNotEmpty(list) 
+						&& !MapUtils.getString(param, "role_id").equals(MapUtils.getString(list.get(0), "role_id")))) {
 			req.setCode("9999");
 			req.setMsg("角色名称重复，请修改角色名称后再重新提交！");
 			return req;
@@ -87,8 +91,9 @@ public class SysRoleBoImpl implements SysRoleBo{
 	@Override
 	public ReturnVO editRolePrivilege(Map param) {
 		ReturnVO req = new ReturnVO();
-		
-		List<Map> list = JSON.parseArray(MapUtils.getString(param, "json"), Map.class);
+		String json = MapUtils.getString(param, "json");
+		json = json.replaceAll("＇","\'").replaceAll("＂","\"");
+		List<Map> list = JSON.parseArray(json, Map.class);
 		
 		String role_id = MapUtils.getString(param, "role_id");
 		Map map = new HashMap();

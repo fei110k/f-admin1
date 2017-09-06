@@ -16,10 +16,20 @@
 			and role_id=#{role_id}
 		</if>
 		<if test="role_name != null and role_name != '' ">
-			and (role_name like '%${role_name}%' or role_desc = #{role_desc})
+			and (role_name like #{role_name} or role_desc like #{role_name})
 		</if>
 	</select>
 	
+	<select id="findSysRoleById" resultType="Map" parameterType="Map">
+		SELECT 
+		  role_id,
+		  role_name,
+		  role_desc,
+		  status_staff_id,
+		  status_date
+		FROM sys_role 
+		where role_id = #{role_id}
+	</select>
 	
 	<select id="findSysRoleByName" resultType="Map" parameterType="Map">
 		SELECT 

@@ -10,8 +10,15 @@
 			and a.org_id=#{org_id} 
 		</if>
 		<if test="org_name != null and org_name != '' ">
-			and a.org_name like '%${org_name}%'
+			and a.org_name like #{org_name}
 		</if>
+	</select>
+	
+	<!-- 根据ID查询 -->
+	<select id="findSysOrgById" resultType="Map" parameterType="Map">
+		SELECT a.*,(select org_name from sys_org b where b.org_id = a.parent_id) parent_name 
+		FROM sys_org a 
+		where a.org_id=#{org_id} 
 	</select>
 	
 	<!-- 根据条件修改 -->

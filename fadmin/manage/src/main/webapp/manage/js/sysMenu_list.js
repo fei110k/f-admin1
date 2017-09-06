@@ -130,6 +130,15 @@ var setting = {
 		enable: true,
 		chkboxType:{ "Y" : "s", "N" : "s" }
 	},*/
+	edit: {
+		enable: true,
+		drag: {
+			isCopy: false,
+			isMove: true
+		},
+		showRemoveBtn:false,	//不展示删除按钮
+		showRenameBtn:false,	//不展示修改名称按钮
+	},
 	data: {
 		simpleData: {
 			enable: true,
@@ -141,8 +150,55 @@ var setting = {
 	},
 	callback:{
 		//单击事件
-		onClick:treeOnClick
+		onClick:treeOnClick,
+		beforeDrag: beforeDrag,	//在移动节点前
+		beforeDrop: beforeDrop		//在移动节点到目标节点前
 	}
+}
+
+//移动完节点后
+function beforeDrop(treeId, treeNodes, targetNode, moveType) {
+	console.log(targetNode);
+	if(targetNode == null){
+		return false;
+	}
+	confirm("是否移动到节点“"+targetNode.name+"”下？",{
+		btn:["移动","取消"],
+		btn1:function(index, layero){
+			var menuBtnTree = $.fn.zTree.getZTreeObj("menuBtnTree");
+			menuBtnTree.moveNode(targetNode,treeNodes[0], "inner");
+			
+			var param = {};
+			param.parent_id = targetNode.id;
+			param.menu_id = treeNodes[0].id;
+			
+			$.ajax({
+				type: 'post', // 提交方式 get/post
+				dataType:"json",
+				data:param,
+		        url: "/SysMenu/menuUpdateParent.do", // 需要提交的 url
+		        success: function(data) { // data 保存提交后返回的数据，一般为 json 数据
+		        	alert(data.msg);
+		        	layer.close(index);
+		        }
+			});
+		},
+		btn2:function(index, layero){
+			layer.close(index);
+		}
+	})
+	return false;
+}
+
+
+//如果返回 false，zTree 将不删除节点，也无法触发 onRemove 事件回调函数
+function beforeDrag(treeId, treeNode){
+	console.log(treeNode);
+	if(treeNode[0].type == "btn"){
+		alert("按钮不能拖拽移动！");
+		return false;
+	}
+	return true;
 }
 
 $(function(){

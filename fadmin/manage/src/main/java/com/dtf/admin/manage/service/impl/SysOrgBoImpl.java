@@ -27,6 +27,9 @@ public class SysOrgBoImpl implements SysOrgBo{
 	
 	@Override
 	public List findSysOrg(Map param){
+		String org_name = MapUtils.getString(param, "org_name");
+		param.put("org_name", "%"+org_name+"%");
+		
 		List<Map<String, Object>> list = 
 				daoUtils.getSqlSessionTemplate().selectList("SysOrg.findSysOrg");
 		//如果只是页面的情况下，更改页面的图标
@@ -42,7 +45,7 @@ public class SysOrgBoImpl implements SysOrgBo{
 	
 	@Override
 	public Map findSysOrgById(Map param) {
-		return daoUtils.getSqlSessionTemplate().selectOne("SysOrg.findSysOrg", param);
+		return daoUtils.getSqlSessionTemplate().selectOne("SysOrg.findSysOrgById", param);
 	}
 	
 	@Override

@@ -36,7 +36,7 @@
 						<label class="form-label col-xs-3"><span class="c-red">*</span>归属组织：</label>
 						<div class="formControls col-xs-9">
 							<div class="col-xs-8 no-padding">
-								<input disabled="disabled" type="text" class="input-text" id="org_name" name="org_name"/>
+								<input readonly="readonly" type="text" class="input-text" id="org_name" name="org_name"/>
 							</div>
 							<div class="col-xs-4 no-padding">
 								<a href="javascript:void();" onclick="selectSysOrg()" class="btn btn-primary radius">

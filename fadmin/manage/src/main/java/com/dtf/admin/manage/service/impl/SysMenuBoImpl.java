@@ -73,7 +73,8 @@ public class SysMenuBoImpl implements SysMenuBo{
 	
 	@Override
 	public PageInfo findSysMenu(Map param) {
-		// TODO Auto-generated method stub
+		String menu_name = MapUtils.getString(param, "menu_name");
+		param.put("menu_name", "%"+menu_name+"%");
 		return daoUtils.selectPage("SysMenu.findSysMenu", param);
 	}
 	
@@ -125,7 +126,7 @@ public class SysMenuBoImpl implements SysMenuBo{
 		
 		//页面防XSS攻击特殊处理
 		String class_style = MapUtils.getString(param, "class_style");
-		class_style = class_style.replaceAll("＆", "&");
+		class_style = class_style.replaceAll("＆", "&").replaceAll("；", ";");
 		param.put("class_style", class_style);
 		
 		int update_count = daoUtils.getSqlSessionTemplate().update("SysMenu.updateSysMenuByConn", param);
@@ -165,6 +166,13 @@ public class SysMenuBoImpl implements SysMenuBo{
 	public ReturnVO deleteSysMenuByIds(Map param) {
 		ReturnVO req = new ReturnVO();
 		int update_count = daoUtils.getSqlSessionTemplate().delete("SysMenu.deleteSysMenuByIds", param);
+		return req;
+	}
+
+	@Override
+	public ReturnVO menuUpdateParent(Map param) {
+		ReturnVO req = new ReturnVO();
+		int update_count = daoUtils.getSqlSessionTemplate().delete("SysMenu.menuUpdateParent", param);
 		return req;
 	}
 	

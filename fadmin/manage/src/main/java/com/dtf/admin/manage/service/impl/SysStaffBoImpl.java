@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.dtf.admin.common.ReturnVO;
 import com.dtf.admin.common.utils.MD5Utils;
+import com.dtf.admin.common.utils.MapUtils;
 import com.dtf.admin.common.utils.UUIDGenerator;
 import com.dtf.admin.common.utils.mybatis.DaoUtils;
 import com.dtf.admin.manage.service.SysStaffBo;
@@ -25,12 +26,15 @@ public class SysStaffBoImpl implements SysStaffBo{
 	@Override
 	public Map findSysStaffById(Map param) {
 		// TODO Auto-generated method stub
-		return daoUtils.getSqlSessionTemplate().selectOne("SysStaff.findSysStaff", param);
+		return daoUtils.getSqlSessionTemplate().selectOne("SysStaff.findSysStaffById", param);
 	}
 	
 	@Override
 	public PageInfo findSysStaff(Map param) {
 		// TODO Auto-generated method stub
+		String staff_name = MapUtils.getString(param, "staff_name");
+		param.put("staff_name_like", "%"+staff_name+"%");
+		
 		return daoUtils.selectPage("SysStaff.findSysStaff", param);
 	}
 	

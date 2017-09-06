@@ -26,17 +26,17 @@
 		<filter-name>springCharacterEncodingFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
-	<!-- XSS防攻击过滤器，将<>'"等特殊字符转义为html代码 -->
+	<!-- 特殊字符过滤，防止XSS防攻击，防止SQL注入攻击等，将<>'"等特殊字符转义为html代码或者全角编码 -->
 	<filter>
-		<filter-name>XSSFilter</filter-name>
-		<filter-class>com.dtf.admin.manage.filter.XSSFilter</filter-class>
+		<filter-name>SpecialCharsFilter</filter-name>
+		<filter-class>com.dtf.admin.manage.filter.SpecialCharsFilter</filter-class>
 		<init-param>
 			<param-name>includeStrings</param-name><!-- 只对指定过滤参数后缀进行过滤 -->
 			<param-value>.do;.jsp</param-value>
 		</init-param>
 	</filter>
 	<filter-mapping>
-		<filter-name>XSSFilter</filter-name>
+		<filter-name>SpecialCharsFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 	

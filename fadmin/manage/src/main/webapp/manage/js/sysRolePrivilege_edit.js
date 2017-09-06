@@ -1,7 +1,7 @@
 var setting = {
 		check: {
 			enable: true,
-			chkboxType:{ "Y" : "s", "N" : "s" }
+			chkboxType:{ "Y" : "ps", "N" : "ps" }
 		},
 		data: {
 			simpleData: {

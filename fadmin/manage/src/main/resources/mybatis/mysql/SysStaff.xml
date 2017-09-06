@@ -11,7 +11,19 @@
 			and staff_id=#{staff_id}
 		</if>
 		<if test="staff_name != null and staff_name != '' ">
-			and (staff_name like '%${staff_name}%' or staff_code = #{staff_name})
+			and (staff_name like ${role_name_like} or staff_code = #{staff_name})
+		</if>
+	</select>
+	
+	<select id="findSysStaffById" resultType="Map" parameterType="Map">
+		SELECT a.staff_id,a.staff_code,a.staff_name,a.sex,a.phone,a.family_phone,a.card,a.age,a.education,
+		a.school_name,a.major,a.org_id,a.status,DATE_FORMAT(a.create_date,'%Y-%c-%d %h:%i:%s') create_date,
+		(select org_name from sys_org b where a.org_id = b.org_id) org_name FROM sys_staff a where 1=1
+		<if test="staff_id != null and staff_id != '' ">
+			and staff_id=#{staff_id}
+		</if>
+		<if test="staff_code != null and staff_code != '' ">
+			and staff_code = #{staff_code}
 		</if>
 	</select>
 	

@@ -14,10 +14,10 @@ import javax.servlet.http.HttpServletRequestWrapper;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.util.HtmlUtils;
 
-public class XSSRequestWrapper extends HttpServletRequestWrapper {
+public class SpecialCharsRequestWrapper extends HttpServletRequestWrapper {
 	boolean isUpData = false;//判断是否是上传 上传忽略
 	
-	public XSSRequestWrapper(HttpServletRequest servletRequest) {
+	public SpecialCharsRequestWrapper(HttpServletRequest servletRequest) {
 		super(servletRequest);
         String contentType = servletRequest.getContentType ();
         if (null != contentType)
@@ -63,14 +63,15 @@ public class XSSRequestWrapper extends HttpServletRequestWrapper {
         return value;
     }
 
-    @Override
-    public String getHeader(String name) {
-
-        String value = super.getHeader(name);
-        if (value == null)
-            return null;
-        return stripXSS(value);
-    }
+//		header中的数据，不需要过滤
+//    @Override
+//    public String getHeader(String name) {
+//
+//        String value = super.getHeader(name);
+//        if (value == null)
+//            return null;
+//        return stripXSS(value);
+//    }
 	
     //spring mvc中通过@RequestParam 获取参数时，是调用的此方法
     @Override
@@ -149,8 +150,8 @@ public class XSSRequestWrapper extends HttpServletRequestWrapper {
 //			value = HtmlUtils.htmlEscape(value);	//防止XSS攻击
 			value = value.replaceAll("<", "＜").replaceAll(">", "＞");
 			value = value.replaceAll("\'", "＇").replaceAll("\"", "＂");
-			value = value.replaceAll("&", "＆");
-//			value = value.replaceAll("=", "＝").replaceAll("%", "％");
+			value = value.replaceAll("&", "＆").replaceAll(";", "；");
+			value = value.replaceAll("=", "＝").replaceAll("%", "％");
 //			value = value.replaceAll("\\\\", "＼").replaceAll("-", "－");
 		}
 		return value;
