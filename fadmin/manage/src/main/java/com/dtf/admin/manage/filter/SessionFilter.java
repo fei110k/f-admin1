@@ -93,12 +93,12 @@ public class SessionFilter implements Filter {
 
         StaffUser user = (StaffUser) hrequest.getSession().getAttribute(Consts.SESSION_USER_KEY);//判断用户是否登录
         if (user == null) {
-            wrapper.sendRedirect(redirectPath+"?type=nologin");
+            wrapper.sendRedirect("/manage/login.jsp");	//未登录，直接跳转到登录页面
             return;
         }
         
         if (!hasPri(hrequest.getRequestURI(), user)) {// 对访问的页面进行权限过滤
-        	wrapper.sendRedirect(redirectPath+"?type=nopri");
+        	wrapper.sendRedirect("/manage/403.html");
             return;
         }
         chain.doFilter(request, response);

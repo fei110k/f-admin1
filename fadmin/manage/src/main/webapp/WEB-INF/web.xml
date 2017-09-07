@@ -8,6 +8,15 @@
 		<session-timeout>30</session-timeout>
 	</session-config>
   	
+  	<error-page>
+		<error-code>404</error-code>
+		<location>/manage/404.html</location>
+	</error-page>  
+	<welcome-file-list>
+		<!-- 设置如果未输入详细地址时的页面 -->
+		<welcome-file>/manage/index.jsp</welcome-file>
+	</welcome-file-list>
+	
 	
 	<!-- 设置通过spirng请求的字符格式，默认为UTF-8， 当然，此处只能过滤Post， 如果要解决get请求中的中文字符乱码，请在tomcat的servlet.xml的商品配置处，添加配置URIEncoding="UTF-8" -->
 	<filter>
@@ -26,6 +35,8 @@
 		<filter-name>springCharacterEncodingFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
+	
+	
 	<!-- 特殊字符过滤，防止XSS防攻击，防止SQL注入攻击等，将<>'"等特殊字符转义为html代码或者全角编码 -->
 	<filter>
 		<filter-name>SpecialCharsFilter</filter-name>
