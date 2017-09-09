@@ -1,4 +1,4 @@
-package com.dtf.admin.manage.controller;
+package com.dtf.admin.common.controller;
 
 import java.awt.image.BufferedImage;
 
