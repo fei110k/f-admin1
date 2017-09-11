@@ -78,19 +78,19 @@ public class Log {
 		// 转入具体实现，此处为log4j，可以改为其他不同的日志实现。
 		switch (level) {
 		case info:
-			log.info(message);
+			log.info("\n"+message);
 			break;
 		case debug:
-			log.debug(message);
+			log.debug("\n"+message);
 			break;
 		case warn:
-			log.warn(message);
+			log.warn("\n"+message);
 			break;
 		case error:
-			log.error(message);
+			log.error("\n"+message);
 			break;
 		default:
-			log.debug(message);
+			log.debug("\n"+message);
 		}
 	}
 

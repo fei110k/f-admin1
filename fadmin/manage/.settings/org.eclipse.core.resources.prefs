@@ -1,6 +1,7 @@
 eclipse.preferences.version=1
 encoding//src/main/java=UTF-8
 encoding//src/main/resources=UTF-8
+encoding//src/main/resources/config/log4j.properties=UTF-8
 encoding//src/main/webapp/manage/codeGeneration_add.jsp=UTF-8
 encoding//src/main/webapp/manage/login.jsp=UTF-8
 encoding//src/main/webapp/manage/sysStaff_list.jsp=UTF-8

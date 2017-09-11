@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+	id="schedule-console" version="3.0">
+	<display-name>Archetype Created Web Application</display-name>
+	<session-config>
+		<session-timeout>30</session-timeout>
+	</session-config>
+  	
+  	<error-page>
+		<error-code>404</error-code>
+		<location>/manage/404.html</location>
+	</error-page>  
+	<!-- <welcome-file-list>
+		设置如果未输入详细地址时的页面
+		<welcome-file>/manage/index.jsp</welcome-file>
+	</welcome-file-list> -->
+	
+	
+	<!-- 设置通过spirng请求的字符格式，默认为UTF-8， 当然，此处只能过滤Post， 如果要解决get请求中的中文字符乱码，请在tomcat的servlet.xml的商品配置处，添加配置URIEncoding="UTF-8" -->
+	<filter>
+		<filter-name>springCharacterEncodingFilter</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+		<init-param>
+			<param-name>forceEncoding</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>springCharacterEncodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
+	
+	<!-- 特殊字符过滤，防止XSS防攻击，防止SQL注入攻击等，将<>'"等特殊字符转义为html代码或者全角编码 -->
+	<!-- <filter>
+		<filter-name>SpecialCharsFilter</filter-name>
+		<filter-class>com.dtf.admin.weixin.filter.SpecialCharsFilter</filter-class>
+		<init-param>
+			<param-name>includeStrings</param-name>只对指定过滤参数后缀进行过滤
+			<param-value>.do;.jsp</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>SpecialCharsFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping> -->
+	
+	
+	<!-- 登录及权限校验过滤器 -->
+	<!-- <filter>
+		<filter-name>SessionFilter</filter-name>
+		<filter-class>com.dtf.admin.weixin.filter.SessionFilter</filter-class>
+		<init-param>
+			<param-name>logonStrings</param-name>对登录页面不进行过滤
+			<param-value>/manage/login.jsp;/login.do;/Verification.do</param-value>
+		</init-param>
+		<init-param>
+			<param-name>includeStrings</param-name>只对指定过滤参数后缀进行过滤
+			<param-value>.do;.jsp</param-value>
+		</init-param>
+		<init-param>
+			<param-name>redirectPath</param-name>未通过跳转到登录界面
+			<param-value>/manage/403.html</param-value>
+		</init-param>
+		<init-param>
+			<param-name>disabletestfilter</param-name>Y:过滤无效
+			<param-value>N</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>SessionFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping> -->
+	
+	<!-- Spring的监听配置 -->
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>classpath:spring/applicationContext.xml</param-value>
+	</context-param>
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+	<!-- Spring mvc的配置 -->
+	<servlet>
+		<servlet-name>mySpringMVC</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>classpath:spring/applicationContext_mvc.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+		<async-supported>true</async-supported>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>mySpringMVC</servlet-name>
+		<url-pattern>*.do</url-pattern>
+	</servlet-mapping>
+
+	<!-- 加载spring log4j日志的配置 -->
+	<context-param>
+		<param-name>log4jConfigLocation</param-name>
+		<param-value>classpath:config/log4j.properties</param-value>
+	</context-param>
+	<listener>
+		<listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
+	</listener>
+	
+	<!-- 加载自定义的tag标签 -->
+	<!-- <jsp-config> 
+	  <taglib>
+	        <taglib-uri>/WEB-INF/base.tld</taglib-uri>
+	        <taglib-location>/WEB-INF/base.tld</taglib-location>
+	  </taglib>
+  </jsp-config> -->
+</web-app>

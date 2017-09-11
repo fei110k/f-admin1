@@ -36,18 +36,7 @@ function Huiasidedisplay(){
 		$(".Hui-aside").show();
 	} 
 }
-/*获取皮肤cookie*/
-function getskincookie(){
-	var v = $.cookie("Huiskin");
-	var hrefStr=$("#skin").attr("href");
-	if(v==null||v==""){
-		v="default";
-	}
-	if(hrefStr!=undefined){
-		var hrefRes=hrefStr.substring(0,hrefStr.lastIndexOf('skin/'))+'skin/'+v+'/skin.css';
-		$("#skin").attr("href",hrefRes);
-	}
-}
+
 /*菜单导航*/
 function Hui_admin_tab(obj){
 	var bStop = false,
@@ -237,7 +226,6 @@ function getHTMLDate(obj) {
 
 $(function(){
 	getHTMLDate($("#top_time"));
-	getskincookie();
 	//layer.config({extend: 'extend/layer.ext.js'});
 	Huiasidedisplay();
 	var resizeID;
@@ -309,12 +297,4 @@ $(function(){
 		oUl.stop().animate({'left':-num*100},100);
 	}
 	
-	/*换肤*/
-	$("#Hui-skin .dropDown-menu a").click(function(){
-		var v = $(this).attr("data-val");
-		$.cookie("Huiskin", v);
-		var hrefStr=$("#skin").attr("href");
-		var hrefRes=hrefStr.substring(0,hrefStr.lastIndexOf('skin/'))+'skin/'+v+'/skin.css';
-		$(window.frames.document).contents().find("#skin").attr("href",hrefRes);
-	});
 }); 

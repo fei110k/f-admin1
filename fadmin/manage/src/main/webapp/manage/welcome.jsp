@@ -171,8 +171,8 @@
 	</table>
 </div>
 
-<jsp:include page="../public/common/jsp/include-footer.jsp"></jsp:include>
 <jsp:include page="../public/common/jsp/include-down.jsp"></jsp:include>
 
+<jsp:include page="../public/common/jsp/include-footer.jsp"></jsp:include>
 </body>
 </html>

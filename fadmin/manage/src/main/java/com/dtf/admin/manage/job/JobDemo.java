@@ -20,7 +20,7 @@ public class JobDemo implements Job{
 	@Override
 	public void execute(JobExecutionContext context) throws JobExecutionException {
 		// TODO Auto-generated method stub
-		Log.info("\n"+DateUtil.getFormatedDateTime()+"示例定时任务类开始执行");
+		Log.info(DateUtil.getFormatedDateTime()+"示例定时任务类开始执行");
 	}
 
 }

@@ -7,6 +7,7 @@
   <modules>
   	<module>common</module>
   	<module>manage</module>
+  	<module>weixin</module>
   </modules>
   
   <properties>

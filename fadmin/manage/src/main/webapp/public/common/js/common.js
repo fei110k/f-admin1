@@ -32,13 +32,13 @@ $(function(){
 		radioClass: 'iradio-blue',
 		increaseArea: '20%'
 	});
-	
-	//添加编码CODE的验证字母数据或下划线
-	$.validator.addMethod("checkCode",function(value,element,params){  
-        var checkName = /^\w{3,50}$/g;  
-        return this.optional(element)||(checkName.test(value));  
-    },"*只允许3-50位英文字母、数字或者下划线！");  
-	
+	if($.validator){
+		//添加编码CODE的验证字母数据或下划线
+		$.validator.addMethod("checkCode",function(value,element,params){  
+			var checkName = /^\w{3,50}$/g;  
+			return this.optional(element)||(checkName.test(value));  
+		},"*只允许3-50位英文字母、数字或者下划线！");  
+	}
 	function setCache(key,value,expires){
 		try {
 			value = JSON.stringify(value);
@@ -56,7 +56,7 @@ $(function(){
 			try {
 				value = JSON.stringify(value);
 			} catch (e) {}
-			expires = expires?expires:86400*5;	//默认5天
+			expires = expires?expires:86400*1000*5;	//默认5天
 			BrowserStorage.api.set({
 				"key" : key,
 				"value" : value,

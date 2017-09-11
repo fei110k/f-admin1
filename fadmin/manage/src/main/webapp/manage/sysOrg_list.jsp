@@ -23,54 +23,56 @@
 		</a>
 		<span class="c-red">提示：请先选择一个组织再进行操作！</span>
 	</div>
-	<div class="col-xs-3">
-		<ul id="orgTree" class="ztree"></ul>
-	</div>
-	<div class="col-xs-9">
-		<form class="form form-horizontal" id="OrgForm">
-			<div class="row cl">
-				<label class="form-label col-xs-3">组织名称：</label>
-				<div class="formControls col-xs-9">
-					<input type="text" class="input-text" value="" placeholder="" id="org_name" name="org_name">
+	<div class="cl">
+		<div class="col-xs-3">
+			<ul id="orgTree" class="ztree"></ul>
+		</div>
+		<div class="col-xs-9">
+			<form class="form form-horizontal" id="OrgForm">
+				<div class="row cl">
+					<label class="form-label col-xs-3">组织名称：</label>
+					<div class="formControls col-xs-9">
+						<input type="text" class="input-text" value="" placeholder="" id="org_name" name="org_name">
+					</div>
 				</div>
-			</div>
-			<div class="row cl">
-				<label class="form-label col-xs-3">状态：</label>
-				<div class="formControls col-xs-9">
-					<span class="select-box">
-						<select class="select" name="status" size="1">
-							<option value="0">有效</option>
-							<option value="1">无效</option>
-						</select>
-					</span>
+				<div class="row cl">
+					<label class="form-label col-xs-3">状态：</label>
+					<div class="formControls col-xs-9">
+						<span class="select-box">
+							<select class="select" name="status" size="1">
+								<option value="0">有效</option>
+								<option value="1">无效</option>
+							</select>
+						</span>
+					</div>
 				</div>
-			</div>
-		</form>
-		<form class="form form-horizontal" id="BtnShowForm" style="display: none;">
-			<div class="row cl">
-				<label class="form-label col-xs-3">按钮名称：</label>
-				<div class="formControls col-xs-9">
-					<input type="text" class="input-text" value="" placeholder="" id="name" name="name">
+			</form>
+			<form class="form form-horizontal" id="BtnShowForm" style="display: none;">
+				<div class="row cl">
+					<label class="form-label col-xs-3">按钮名称：</label>
+					<div class="formControls col-xs-9">
+						<input type="text" class="input-text" value="" placeholder="" id="name" name="name">
+					</div>
 				</div>
-			</div>
-			<div class="row cl">
-				<label class="form-label col-xs-3">按钮编码：</label>
-				<div class="formControls col-xs-9">
-					<input type="text" class="input-text" id="btn_code" name="btn_code">
+				<div class="row cl">
+					<label class="form-label col-xs-3">按钮编码：</label>
+					<div class="formControls col-xs-9">
+						<input type="text" class="input-text" id="btn_code" name="btn_code">
+					</div>
 				</div>
-			</div>
-			<div class="row cl">
-				<label class="form-label col-xs-3">状态：</label>
-				<div class="formControls col-xs-9">
-					<span class="select-box">
-						<select class="select" name="status" size="1">
-							<option value="0">有效</option>
-							<option value="1">无效</option>
-						</select>
-					</span>
+				<div class="row cl">
+					<label class="form-label col-xs-3">状态：</label>
+					<div class="formControls col-xs-9">
+						<span class="select-box">
+							<select class="select" name="status" size="1">
+								<option value="0">有效</option>
+								<option value="1">无效</option>
+							</select>
+						</span>
+					</div>
 				</div>
-			</div>
-		</form>
+			</form>
+		</div>
 	</div>
 </div>
 <jsp:include page="../public/common/jsp/include-down.jsp"></jsp:include>
