@@ -33,7 +33,7 @@
 	<div class="navbar navbar-fixed-top">
 		<div class="container-fluid cl">
 			<span class="logo navbar-logo f-l mr-10 hidden-xs"><%=Consts.SYSTEM_NAME %></span>
-			<span class="logo navbar-slogan f-l mr-10 hidden-xs">v1.0.0</span> 
+			<span class="logo navbar-slogan f-l mr-10 hidden-xs"><%=Consts.SYSTEM_VERSION %></span> 
 			<a aria-hidden="false" class="nav-toggle Hui-iconfont visible-xs" href="javascript:;">&#xe667;</a>
 			<nav id="Hui-userbar" class="nav navbar-nav navbar-userbar hidden-xs">
 				<ul class="cl">
@@ -104,8 +104,10 @@
 <script type="text/javascript" src="/public/lib/H-ui.admin/lib/jquery.contextmenu/jquery.contextmenu.r2.js"></script>
 
 <script type="text/javascript" src="/public/common/js/common.js"></script> 
-<script type="text/javascript" src="js/index.js">
-</script> 
+<script type="text/javascript">
+	var system_version = "<%=Consts.SYSTEM_VERSION %>";
+</script>
+<script type="text/javascript" src="js/index.js"></script> 
 
 </body>
 </html>

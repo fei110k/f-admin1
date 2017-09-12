@@ -43,6 +43,17 @@ $("#Hui-skin .dropDown-menu a").click(function(){
 	$(window.frames.document).contents().find("#skin").attr("href",hrefRes);
 });
 
+function setSystemVersion(){
+	var v =  Cache.get("SYSTEM_VERSION");
+	if(v && system_version && system_version != v){
+		clearCache();
+	}
+	if(system_version){
+		Cache.set("SYSTEM_VERSION",system_version,new Date("2099-04-01"));
+	}
+}
+
 $(function(){
 	getskincookie();
+	setSystemVersion();
 })

@@ -2,8 +2,9 @@ package com.dtf.admin.common;
 
 public class Consts {
 	//系统参数
-	public static final String SYSTEM_NAME = "卫浴进销存管理系统";				//系统名称
+	public static final String SYSTEM_NAME = "卫浴进销存后台管理系统";				//系统名称
 	public static final String SYSTEM_COPYRIGHT = "fei110k@qq.com";			//版权所有
+	public static final String SYSTEM_VERSION = "V1.0.0.0";			//版本号
 	
 	/**数据库类型**/
 	public static final String DB_TYPE_MYSQL = "mysql";//数据库用mysql，对应param.properties的DBTYPE

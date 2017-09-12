@@ -1,14 +1,18 @@
-﻿<!DOCTYPE HTML>
+﻿<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8"%>
+<!DOCTYPE HTML>
 <html>
 <head>
 <jsp:include page="../public/common/jsp/include-up.jsp"></jsp:include>
-
+<%@ page import="com.dtf.admin.common.Consts" %>
 <link href="/public/lib/H-ui.admin/static/h-ui.admin/css/H-ui.login.css" rel="stylesheet" type="text/css" />
 <title>登录</title>
 </head>
 <body>
 <input type="hidden" id="TenantId" name="TenantId" value="" />
-<div class="header"></div>
+<div class="header">
+	<h1 style=""><%=Consts.SYSTEM_NAME %> <%=Consts.SYSTEM_VERSION %></h1>
+</div>
 <div class="loginWraper">
   <div id="loginform" class="loginBox">
     <form class="form form-horizontal" id="loginForm" method="post">
@@ -30,10 +34,10 @@
           		value="" style="width:150px;"
           		name="verificationCode" id="verificationCode">
           	<img src="/Verification.do" id="VerificationImage" onclick="changeVerifyCode()">
-			<a id="kanbuq" href="javascript:changeVerifyCode();">看不清，换一张</a>
+			<a id="kanbuq" href="javascript:changeVerifyCode();" class="white">看不清，换一张</a>
 		</div>
       </div>
-      <div class="row cl">
+      <div class="row cl white">
         <div class="formControls col-xs-8 col-xs-offset-3">
           <label for="online">
             <input type="checkbox" name="online" id="online" value="">使我保持登录状态</label>
@@ -48,7 +52,7 @@
     </form>
   </div>
 </div>
-<div class="footer">Copyright 库存管理系统 by H-ui.admin v3.1</div>
+<div class="footer">Copyright <%=Consts.SYSTEM_NAME %> <%=Consts.SYSTEM_COPYRIGHT %></div>
 <script type="text/javascript" src="/public/lib/H-ui.admin/lib/jquery/1.9.1/jquery.min.js"></script> 
 <script type="text/javascript" src="/public/lib/H-ui.admin/static/h-ui/js/H-ui.min.js"></script> 
 <script type="text/javascript" src="/public/lib/H-ui.admin/lib/layer/2.4/layer.js"></script>
@@ -89,9 +93,6 @@ $(function(){
 		            // 此处可对 data 作相关处理
 		        	if(data.code == '0000'){
 		        		window.location.href = "/manage/index.jsp";
-		        	}else if(data.code == '1001'){
-		                alert(data.msg);
-		                //$("#verificationCode").val("");
 		        	}else{
 		        		alert(data.msg);
 		        	}
