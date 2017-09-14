@@ -23,6 +23,9 @@
 		<if test="menu_name != null and menu_name != '' ">
 			and a.menu_name like #{menu_name}
 		</if>
+		<if test="menu_path != null and menu_path != '' ">
+			and a.menu_path like #{menu_path}
+		</if>
 	</select>
 	
 	<!-- 根据条件修改 -->
@@ -30,7 +33,9 @@
 		UPDATE 
 		  sys_menu 
 		SET
-		  parent_id = #{parent_id}
+		  parent_id = #{parent_id},
+		  menu_path = #{menu_path}
+		  
 		WHERE menu_id = #{menu_id}
 	</update>
 	

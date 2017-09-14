@@ -1,5 +1,6 @@
 ﻿<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="com.dtf.admin.common.Consts" %>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -8,7 +9,8 @@
 </head>
 <body>
 <div class="page-container">
-	<p class="f-20 text-success">欢迎使用H-ui.admin <span class="f-14">v3.1</span>后台模版！</p>
+	<p class="f-20 text-success">欢迎使用<%=Consts.SYSTEM_NAME %>  <span class="f-14"><%=Consts.SYSTEM_VERSION %></span></p>
+	<p>本系统致力于为初创团队、个人开发者提供优质可靠的后台管理解决方案，如需要企业培训、合作，请联系fei110k@qq.com</p>
 	<p>登录次数：18 </p>
 	<p>上次登录IP：222.35.131.79.1  上次登录时间：2014-6-14 11:19:55</p>
 	<table class="table table-border table-bordered table-bg">

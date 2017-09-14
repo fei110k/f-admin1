@@ -158,18 +158,18 @@ var setting = {
 
 //移动完节点后
 function beforeDrop(treeId, treeNodes, targetNode, moveType) {
-	console.log(targetNode);
 	if(targetNode == null){
 		return false;
 	}
-	confirm("是否移动到节点“"+targetNode.name+"”下？",{
+	var targetNodeName = targetNode?targetNode.name:"根节点";
+	confirm("是否移动到节点“"+targetNodeName+"”下？",{
 		btn:["移动","取消"],
 		btn1:function(index, layero){
 			var menuBtnTree = $.fn.zTree.getZTreeObj("menuBtnTree");
 			menuBtnTree.moveNode(targetNode,treeNodes[0], "inner");
 			
 			var param = {};
-			param.parent_id = targetNode.id;
+			param.parent_id = targetNode?targetNode.id:"-1";
 			param.menu_id = treeNodes[0].id;
 			
 			$.ajax({

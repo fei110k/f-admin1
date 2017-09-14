@@ -170,9 +170,38 @@ public class SysMenuBoImpl implements SysMenuBo{
 	}
 
 	@Override
+	@Transactional
 	public ReturnVO menuUpdateParent(Map param) {
 		ReturnVO req = new ReturnVO();
+		
+		String parent_id = MapUtils.getString(param, "parent_id");
+		parent_id = parent_id.replace("－", "-");
+		String menu_id = MapUtils.getString(param, "menu_id");
+		Map query_param = new HashMap();
+		query_param.put("menu_id", parent_id);
+		Map parentMenu = daoUtils.getSqlSessionTemplate().selectOne("SysMenu.findSysMenu", query_param);
+		
+		query_param.put("menu_id", menu_id);
+		Map objMenu = daoUtils.getSqlSessionTemplate().selectOne("SysMenu.findSysMenu", query_param);
+		
+		String new_parent_path = MapUtils.getString(parentMenu, "menu_path");
+		
+		//修改当前节点
+		param.put("menu_path", new_parent_path+"."+menu_id);
 		int update_count = daoUtils.getSqlSessionTemplate().delete("SysMenu.menuUpdateParent", param);
+		
+		//修改当前节点下的子节点
+		query_param.clear();
+		query_param.put("menu_path", MapUtils.getString(objMenu, "menu_path")+".%");
+		List<Map> cList = daoUtils.getSqlSessionTemplate().selectList("SysMenu.findSysMenu", query_param);
+		
+		for (Map map : cList) {
+			String path = MapUtils.getString(map, "menu_path")
+					.replace(MapUtils.getString(objMenu, "menu_path"), new_parent_path+"."+menu_id);
+			map.put("menu_path", path);
+			update_count = daoUtils.getSqlSessionTemplate().delete("SysMenu.menuUpdateParent", map);
+		}
+		
 		return req;
 	}
 	
