@@ -5,6 +5,8 @@ F-admin初衷是为初创企业、个人开发者提供一套可快速部署、�
 
 想了解更多关于本项目的内容，请移步wiki查看更多信息： **[http://git.oschina.net/dtf/f-admin/wikis](http://git.oschina.net/dtf/f-admin/wikis)** 
 
+欢迎加入QQ交流群：点击链接加入交流群 [670827770](https://jq.qq.com/?_wv=1027&k=5xnuaUX) 
+
  **项目页面示例参考** 
 
  **[项目示例查看](http://116.196.103.84:8080/manage/login.jsp)** ，如果打不开，可能是我的云服务器到期了~ :joy: 
