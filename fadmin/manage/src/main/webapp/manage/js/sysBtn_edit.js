@@ -44,14 +44,13 @@ function submitMenuForm(){
 	            url: '/SysButton/'+url+'.do', // 需要提交的 url
 	            success: function(data) { // data 保存提交后返回的数据，一般为 json 数据
 	            	if (data.code == '0000') {
+	            		window.parent.initMenuBtnTree();
 	            		alert(data.msg);
 					}else{
 						alert(data.msg);
 					}
 	            }
 			});
-			
-			 
 			
 			var index = parent.layer.getFrameIndex(window.name);
 			//parent.$('.btn-refresh').click();

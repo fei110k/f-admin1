@@ -42,6 +42,7 @@ function submitOrgForm(){
 	            success: function(data) { // data 保存提交后返回的数据，一般为 json 数据
 	            	if (data.code == '0000') {
 	            		alert(data.msg);
+	            		window.parent.initOrgTree();
 	            		layer_close();
 					}else{
 						alert(data.msg);
