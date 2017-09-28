@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="SysMessage">
+	
+	<!-- 根据条件查询 -->
+	<select id="findSysMessage" resultType="Map" parameterType="Map">
+		SELECT 
+		  msg_id,
+		  receive_staff_id,
+		  send_staff_id,
+		  msg_title,
+		  msg_content,
+		  msg_type,
+		  receive_time,
+		  msg_state,
+		  msg_state_time,
+		  is_top,
+		  msg_url
+		FROM
+		  sys_message where receive_staff_id = #{staff_id}
+		<if test="msg_id != null and msg_id != '' ">
+			and msg_id=#{msg_id}
+		</if>
+		<if test="role_name != null and role_name != '' ">
+			and (msg_title like #{msg_content} or msg_content like #{msg_content})
+		</if>
+		order by is_top
+	</select>
+	
+	<select id="findSysMessageById" resultType="Map" parameterType="Map">
+		SELECT 
+		 msg_id,
+		  receive_staff_id,
+		  send_staff_id,
+		  msg_title,
+		  msg_content,
+		  msg_type,
+		  receive_time,
+		  msg_state,
+		  msg_state_time,
+		  is_top,
+		  msg_url
+		FROM sys_message 
+		where msg_id = #{msg_id}
+	</select>
+	
+	<!-- 根据条件修改 -->
+	<update id="updateSysMessageById" parameterType="Map">
+		UPDATE 
+		  sys_message 
+		SET
+		  msg_state_time = now(),msg_state = #{msg_state}
+		WHERE msg_id = #{msg_id}
+	</update>
+	
+	<insert id="insertSysMessage" parameterType="Map">
+		INSERT INTO sys_message (
+		  msg_id,
+		  receive_staff_id,
+		  send_staff_id,
+		  msg_title,
+		  msg_content,
+		  msg_type,
+		  receive_time,
+		  msg_state,
+		  msg_state_time,
+		  is_top,
+		  msg_url
+		) 
+		VALUES
+		  (
+		    #{msg_id},
+		    #{receive_staff_id},
+		    #{send_staff_id},
+		    #{msg_title},
+		    #{msg_content},
+		    #{msg_type},
+		    #{receive_time},
+		    #{msg_state},
+		    #{msg_state_time},
+		    #{is_top},
+		    #{msg_url}
+		  )
+	</insert>
+	
+	<!-- 根据ID删除 -->
+	<delete id="deleteSysMessageById" parameterType="Map">
+		DELETE FROM sys_message WHERE msg_id = #{msg_id}
+	</delete>
+	
+</mapper>

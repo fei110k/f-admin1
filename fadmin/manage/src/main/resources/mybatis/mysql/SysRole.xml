@@ -56,7 +56,7 @@
 	</update>
 	
 	<insert id="insertSysRole" parameterType="Map">
-		INSERT INTO fadmin.sys_role (
+		INSERT INTO sys_role (
 		  role_id,
 		  role_name,
 		  role_desc,

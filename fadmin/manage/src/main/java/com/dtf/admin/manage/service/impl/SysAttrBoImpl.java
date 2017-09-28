@@ -56,6 +56,7 @@ public class SysAttrBoImpl implements SysAttrBo{
 		int update_count = daoUtils.getSqlSessionTemplate().insert("SysAttr.insertSysAttr", param);
 		
 		String attr_values_str = MapUtils.getString(param, "attr_values");
+		attr_values_str = attr_values_str.replaceAll("＂", "\"");
 		List<Map> list = JSON.parseArray(attr_values_str, Map.class);
 		for (int i = 0; i < list.size(); i++) {
 			Map paramMap = list.get(i);
@@ -78,6 +79,7 @@ public class SysAttrBoImpl implements SysAttrBo{
 		update_count = daoUtils.getSqlSessionTemplate().delete("SysAttr.deleteSysAttrValue", param);
 		
 		String attr_values_str = MapUtils.getString(param, "attr_values");
+		attr_values_str = attr_values_str.replaceAll("＂", "\"");
 		List<Map> list = JSON.parseArray(attr_values_str, Map.class);
 		for (int i = 0; i < list.size(); i++) {
 			Map paramMap = list.get(i);

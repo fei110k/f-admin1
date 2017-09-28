@@ -109,6 +109,9 @@ public class SysMenuBoImpl implements SysMenuBo{
 		String menu_children_urls = MapUtils.getString(param, "menu_children_urls");
 		String[] urls = menu_children_urls.split(",");
 		for (int i = 0; i < urls.length; i++) {
+			if (StringUtil.isEmpty(urls[i])) {
+				continue;
+			}
 			Map m = new HashMap();
 			m.put("menu_children_url", urls[i]);
 			m.put("menu_id", menu_id);
