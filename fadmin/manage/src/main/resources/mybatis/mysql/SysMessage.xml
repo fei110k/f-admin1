@@ -21,8 +21,8 @@
 		<if test="msg_id != null and msg_id != '' ">
 			and msg_id=#{msg_id}
 		</if>
-		<if test="role_name != null and role_name != '' ">
-			and (msg_title like #{msg_content} or msg_content like #{msg_content})
+		<if test="msg_title != null and msg_title != '' ">
+			and msg_title like #{msg_title} 
 		</if>
 		order by is_top
 	</select>
@@ -42,6 +42,12 @@
 		  msg_url
 		FROM sys_message 
 		where msg_id = #{msg_id}
+	</select>
+	
+	<select id="findStaffSysMessageCount" resultType="Map" parameterType="Map">
+		SELECT Count(receive_staff_id) as messageCount
+		FROM sys_message 
+		where receive_staff_id = #{staff_id} and msg_state=#{msg_state}
 	</select>
 	
 	<!-- 根据条件修改 -->
@@ -75,9 +81,9 @@
 		    #{msg_title},
 		    #{msg_content},
 		    #{msg_type},
-		    #{receive_time},
+		    now(),
 		    #{msg_state},
-		    #{msg_state_time},
+		    now(),
 		    #{is_top},
 		    #{msg_url}
 		  )

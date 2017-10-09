@@ -9,6 +9,8 @@ public interface SysMessageBo {
 	
 	public PageInfo findSysMessage(Map param);
 	
+	public Map findStaffSysMessageCount(Map param);
+	
 	public ReturnVO insertSysMessage(Map param);
 	
 	public ReturnVO updateSysMessageById(Map param);

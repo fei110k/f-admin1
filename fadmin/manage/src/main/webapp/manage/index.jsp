@@ -22,6 +22,10 @@
 <link rel="stylesheet" type="text/css" href="/public/lib/H-ui.admin/lib/Hui-iconfont/1.0.8/iconfont.css" />
 <link rel="stylesheet" type="text/css" href="/public/lib/H-ui.admin/static/h-ui.admin/skin/default/skin.css" id="skin" />
 <link rel="stylesheet" type="text/css" href="/public/lib/H-ui.admin/static/h-ui.admin/css/style.css" />
+
+<!-- 鬼畜抖动插件 -->
+<!-- <link rel="stylesheet" type="text/css" href="http://cdnjs.cloudflare.com/ajax/libs/csshake/1.5.2/csshake-default.min.css" /> -->
+
 <!--[if IE 6]>
 <script type="text/javascript" src="/public/lib/H-ui.admin/lib/DD_belatedPNG_0.0.8a-min.js" ></script>
 <script>DD_belatedPNG.fix('*');</script>
@@ -45,7 +49,12 @@
 							<li><a href="javascript:;" onClick="clearCache()">清理缓存</a></li>
 						</ul>
 					</li>
-					<li id="Hui-msg"> <a href="#" title="消息"><span class="badge badge-danger">1</span><i class="Hui-iconfont" style="font-size:18px">&#xe68a;</i></a> </li>
+					<li id="Hui-msg"> 
+						<a href="javascript:void(0);" title="消息">
+							<span class="badge badge-danger" style="display: none;" id="staffMessageCount">0</span>
+							<i class="Hui-iconfont" style="font-size:18px">&#xe68a;</i>
+						</a>
+					</li>
 					<li id="Hui-skin" class="dropDown right dropDown_hover"> <a href="javascript:;" class="dropDown_A" title="换肤"><i class="Hui-iconfont" style="font-size:18px">&#xe62a;</i></a>
 						<ul class="dropDown-menu menu radius box-shadow">
 							<li><a href="javascript:;" data-val="green" title="默认（绿色）">默认（绿色）</a></li>

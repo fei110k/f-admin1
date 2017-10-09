@@ -37,12 +37,21 @@ function Huiasidedisplay(){
 	} 
 }
 
-/*菜单导航*/
+/*菜单按钮导航事件*/
 function Hui_admin_tab(obj){
+	var href = $(obj).attr('data-href'),
+		title = $(obj).attr("data-title");
+	open_Hui_admin_tab(href,title);
+}
+/**
+ * 打开新的窗口tab页
+ * @param href 类似：/Sysxxx/test.jsp
+ * @param title 展示在tab上的名称
+ * @returns {Boolean}
+ */
+function open_Hui_admin_tab(href,title){
 	var bStop = false,
 		bStopIndex = 0,
-		href = $(obj).attr('data-href'),
-		title = $(obj).attr("data-title"),
 		topWindow = $(window.parent.document),
 		show_navLi = topWindow.find("#min_title_list li"),
 		iframe_box = topWindow.find("#iframe_box");

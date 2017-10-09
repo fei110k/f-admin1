@@ -14,6 +14,7 @@ import com.dtf.admin.common.Consts;
 import com.dtf.admin.common.ReturnVO;
 import com.dtf.admin.common.utils.ListUtils;
 import com.dtf.admin.common.utils.MapUtils;
+import com.dtf.admin.common.utils.StringUtil;
 import com.dtf.admin.common.utils.UUIDGenerator;
 import com.dtf.admin.common.utils.mybatis.DaoUtils;
 import com.dtf.admin.manage.service.SysMessageBo;
@@ -36,8 +37,10 @@ public class SysMessageBoImpl implements SysMessageBo{
 	@Override
 	public PageInfo findSysMessage(Map param) {
 		// TODO Auto-generated method stub
-		String role_name = MapUtils.getString(param, "role_name");
-		param.put("role_name", "%"+role_name+"%");
+		String msg_title = MapUtils.getString(param, "msg_title");
+		if (StringUtil.isNotEmpty(msg_title)) {
+			param.put("msg_title", "%"+msg_title+"%");
+		}
 		return daoUtils.selectPage("SysMessage.findSysMessage", param);
 	}
 	
@@ -45,19 +48,17 @@ public class SysMessageBoImpl implements SysMessageBo{
 	public ReturnVO insertSysMessage(Map param) {
 		ReturnVO req = new ReturnVO();
 		
-		List list = daoUtils.getSqlSessionTemplate().selectList("SysMessage.findSysMessageByName", param);
-		if (ListUtils.isNotEmpty(list)) {
-			req.setCode("9999");
-			req.setMsg("角色名称重复，请修改角色名称后再重新提交！");
-			return req;
+		String msg_id = MapUtils.getString(param, "msg_id");
+		//在外部调用时，没有输入msg_id的时候，就生成ID，否则不生成
+		if(StringUtil.isEmpty(msg_id)){
+			msg_id = UUIDGenerator.getInst().getUUID32();
+			param.put("msg_id", msg_id);
 		}
-		
-		String role_id = UUIDGenerator.getInst().getUUID32();
-		param.put("role_id", role_id);
 		int update_count = daoUtils.getSqlSessionTemplate().insert("SysMessage.insertSysMessage", param);
 		
 		return req;
 	}
+	
 
 	@Override
 	public ReturnVO updateSysMessageById(Map param) {
@@ -66,7 +67,7 @@ public class SysMessageBoImpl implements SysMessageBo{
 		List<Map> list = daoUtils.getSqlSessionTemplate().selectList("SysMessage.findSysMessageByName", param);
 		if ((ListUtils.isNotEmpty(list) && list.size() > 1 )||
 				(ListUtils.isNotEmpty(list) 
-						&& !MapUtils.getString(param, "role_id").equals(MapUtils.getString(list.get(0), "role_id")))) {
+						&& !MapUtils.getString(param, "msg_id").equals(MapUtils.getString(list.get(0), "msg_id")))) {
 			req.setCode("9999");
 			req.setMsg("角色名称重复，请修改角色名称后再重新提交！");
 			return req;
@@ -81,6 +82,12 @@ public class SysMessageBoImpl implements SysMessageBo{
 		ReturnVO req = new ReturnVO();
 		int update_count = daoUtils.getSqlSessionTemplate().delete("SysMessage.deleteSysMessageById", param);
 		return req;
+	}
+
+	@Override
+	public Map findStaffSysMessageCount(Map param) {
+		param.put("msg_state", "1");
+		return daoUtils.getSqlSessionTemplate().selectOne("SysMessage.findStaffSysMessageCount", param);
 	}
 	
 }

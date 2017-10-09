@@ -1,5 +1,6 @@
 package com.dtf.admin.manage.service.impl;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.commons.logging.Log;
@@ -8,10 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.dtf.admin.common.ReturnVO;
+import com.dtf.admin.common.utils.DateUtil;
 import com.dtf.admin.common.utils.MD5Utils;
 import com.dtf.admin.common.utils.MapUtils;
 import com.dtf.admin.common.utils.UUIDGenerator;
 import com.dtf.admin.common.utils.mybatis.DaoUtils;
+import com.dtf.admin.manage.service.SysMessageBo;
 import com.dtf.admin.manage.service.SysStaffBo;
 import com.github.pagehelper.PageInfo;
 
@@ -19,6 +22,9 @@ import com.github.pagehelper.PageInfo;
 public class SysStaffBoImpl implements SysStaffBo{
 	
 	private static final Log log = LogFactory.getLog(SysStaffBoImpl.class);
+	
+	@Autowired
+	private SysMessageBo sysMessageBo;
 	
 	@Autowired
 	private DaoUtils daoUtils;
@@ -62,6 +68,23 @@ public class SysStaffBoImpl implements SysStaffBo{
 	public ReturnVO updateSysStaffPassword(Map param) {
 		ReturnVO req = new ReturnVO();
 		int update_count = daoUtils.getSqlSessionTemplate().update("SysStaff.updateSysStaffPassword", param);
+		
+		String staff_id = MapUtils.getString(param, "staff_id");
+		
+		//插入sys_message消息
+		Map msg = new HashMap();
+		msg.put("msg_state", "1");  //SYS_STAFF_MSG_STATE 1:未读 ; 2:已阅
+		msg.put("msg_type", "2");	//SYS_STAFF_MSG_TYPE 字典表中2：表示密码修改
+		msg.put("receive_staff_id", staff_id);	//接受消息用户ID
+		msg.put("send_staff_id", staff_id);		//发送消息用户ID
+		msg.put("msg_title", "密码修改提示！");		//发送消息标题
+		msg.put("msg_content", "您好，你的用户登录密码于："+DateUtil.getFormatedDateTime()+
+				"发生变更，如不是本人操作，请联系管理员！");		//发送消息内容
+		msg.put("is_top", "1"); //0;置顶	;1:不置顶
+		msg.put("msg_url", "");	//点击消息跳转的URL
+		
+		sysMessageBo.insertSysMessage(msg);
+		
 		return req;
 	}
 	

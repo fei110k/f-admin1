@@ -90,8 +90,9 @@
 		},
 		assembleThead:function(_self,options){
 			var singleSelect = options.singleSelect;
+			var rowClass = options.rowClass;	//一行的样式
 			/**************************************组装thead开始***************************************************/
-			var theadHtml = "<thead><tr class='text-c'>";
+			var theadHtml = "<thead><tr class='"+rowClass+"'>";
 			
 			var columns = options.columns;
 			for (var i = 0; i < columns.length; i++) {
@@ -99,9 +100,9 @@
 				//如果是在第一列的时候，在第一列前边加上单选或者复选框
 				if (i == 0) {
 					if(singleSelect){
-						theadHtml +="<th width=\"25\"></th>";
+						theadHtml +="<th width=\"10\"></th>";
 					}else{
-						theadHtml +="<th width=\"25\"><input type=\"checkbox\"/></th>";
+						theadHtml +="<th width=\"10\"><input type=\"checkbox\"/></th>";
 					}
 				}
 				
@@ -135,9 +136,9 @@
 						});
 					}
 				}
-				
+				var widthHtml = width?"width=\""+width+"\"":"";
 				var th_class = className?"class=\""+className+"\"":"";
-				theadHtml +="<th "+th_class+" width=\""+width+"\">"+column.name+"</th>"
+				theadHtml +="<th "+th_class+" "+widthHtml+">"+column.name+"</th>"
 			}
 			
 			theadHtml += "</tr></thead>";
@@ -164,6 +165,7 @@
 			var tableId = _self.attr("id");
 			var checkName = tableId+"_ck_n"
 			var columns = options.columns;
+			var rowClass = options.rowClass;	//一行的样式
 			var rowId = null;
 			var tr = "";
 			for (var i = 0; i < columns.length; i++) {
@@ -183,8 +185,8 @@
 				//如果是在第一列的时候，在第一列前边加上单选或者复选框
 				if (i == 0) {
 					rowId = data;
-					tr += "<tr class='text-c' id='"+data+"_tr'>"
-					tr +="<td width=\"25\"><input type=\"checkbox\" name=\""+checkName+"\" rowId='"+rowId+"'/></td>"
+					tr += "<tr class='"+rowClass+"' id='"+data+"_tr'>"
+					tr +="<td width=\"10\"><input type=\"checkbox\" name=\""+checkName+"\" rowId='"+rowId+"'/></td>"
 				}
 				
 				//如果要隐藏，直接就不展示了
@@ -288,6 +290,7 @@
 		
 		columns : [],//定义表头对象，如果指定的TABLE标签内有表头<thead>，则以<thead>为准，否则以此生成。如果没有<thead>也没有指定column则会出错
 		singleSelect : true,//是否单选，false则加入选择框checkbox
+		rowClass:"text-c",
 		onSelectClass : null,//记录被选中时呈现的样式，应用于TR标签，如果不配置则默认
 		
 		onSelect : function(e,rowId,rowData){},//选中记录时触发的事件

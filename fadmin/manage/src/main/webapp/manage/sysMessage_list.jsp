@@ -9,8 +9,8 @@
 <body>
 <div class="pd-20">
   <div class="text-c mb-20">
-    <input type="text" class="input-text" style="width:250px" placeholder="输入角色名称模糊查询" id="role_name">
-    <button type="button" class="btn btn-success" onclick="querySysRole()"><i class="Hui-iconfont">&#xe665;</i>搜索</button>
+    <input type="text" class="input-text" style="width:250px" placeholder="输入消息标题模糊查询" id="msg_title">
+    <button type="button" class="btn btn-success" onclick="querySysMessage()"><i class="Hui-iconfont">&#xe665;</i>搜索</button>
   </div>
   
   <table id="sysMessageDataTable"></table>

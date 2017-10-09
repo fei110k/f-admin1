@@ -53,7 +53,27 @@ function setSystemVersion(){
 	}
 }
 
+function findStaffSysMessageCount(){
+	$.ajax({
+		type: 'post', // 提交方式 get/post
+        url: '/SysMessage/findStaffSysMessageCount.do', // 需要提交的 url
+        success: function(data) { // data 保存提交后返回的数据，一般为 json 数据
+        	var count = data.messageCount;
+        	if(count){
+        		$("#staffMessageCount").html(count);
+        		$("#staffMessageCount").show();
+        	}
+        }
+	});
+	//绑定按钮事件
+	$("#Hui-msg").unbind("click").click(function(){
+		open_Hui_admin_tab("/manage/sysMessage_list.jsp","我的消息");
+		$("#staffMessageCount").hide();
+	});
+}
+
 $(function(){
 	getskincookie();
 	setSystemVersion();
+	findStaffSysMessageCount();
 })

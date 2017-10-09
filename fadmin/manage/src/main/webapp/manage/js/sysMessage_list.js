@@ -1,9 +1,10 @@
 function querySysMessage() {
-	var role_name = $("#role_name").val();
+	var msg_title = $("#msg_title").val();
 	$("#sysMessageDataTable").ftable({
 		url:"/SysMessage/findSysMessage.do",
-		param:{role_name:role_name},
+		param:{msg_title:msg_title},
 		singleSelect:true,
+		rowClass:"",
 		//pageSize:2,
 		onLoad:function(data){
 //			console.log(data.list);
@@ -17,9 +18,10 @@ function querySysMessage() {
 			});
 		},
 		columns:[
-			{name:"ID",data:"role_id",hidden:true},
-			{name:"标题",data:"role_name"},
-			{name:"提醒内容",data:"role_desc"},
+			{name:"ID",data:"msg_id",hidden:true,},
+			{name:"标题",data:"msg_title"},
+			{name:"消息内容",data:"msg_content",hidden:true},
+			{name:"操作",data:""},
 		]
 	});
 }
@@ -35,7 +37,7 @@ function editSysMessage(){
 		alert("请先选中一个用户再进行操作");
 		return;
 	}
-	var url = "sysMessage_edit.jsp?edit_type=E&role_id="+rows[0].role_id;
+	var url = "sysMessage_edit.jsp?edit_type=E&msg_id="+rows[0].msg_id;
 	updateSysMessage("修改角色信息",url);
 }
 function editRolePrivilege(){
@@ -44,7 +46,7 @@ function editRolePrivilege(){
 		alert("请先选中一个用户再进行操作");
 		return;
 	}
-	var url = "sysMessagePrivilege_edit.jsp?role_id="+rows[0].role_id;
+	var url = "sysMessagePrivilege_edit.jsp?msg_id="+rows[0].msg_id;
 	layer.open({
 		title:"角色赋权",
 		area: [300+'px', 400 +'px'],
@@ -54,7 +56,7 @@ function editRolePrivilege(){
 		btn1: function(index, layero){
 			var data = getTopWindow()["layui-layer-iframe" + index].callback();
 			$.ajax({
-				data:{json:JSON.stringify(data),role_id:rows[0].role_id},
+				data:{json:JSON.stringify(data),msg_id:rows[0].msg_id},
 				type: 'post', // 提交方式 get/post
 				dataType:"json",
 		        url: '/SysMessage/editRolePrivilege.do', // 需要提交的 url
@@ -134,11 +136,11 @@ function deleteSysMessage(){
 	
 	var param = {};
 	var url = "";
-	confirm("您确定删除用户\""+rows[0].role_name+"\"吗？",{
+	confirm("您确定删除用户\""+rows[0].msg_title+"\"吗？",{
 		btn:["删除","取消"],
 		btn1:function(index){
 			url = "/SysMessage/deleteSysMessageById.do";
-			param.role_id = rows[0].role_id;
+			param.msg_id = rows[0].msg_id;
 			callBack(param, url);
 			layer.close(index);
 		},btn2:function(index){

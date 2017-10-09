@@ -37,7 +37,15 @@ public class SysMessageController {
 	@ResponseBody
 	@RequestMapping(value="/findSysMessage")
 	public PageInfo findSysMessage(@RequestParam Map param){
+		param.put("staff_id", SessionUtil.getStaffUser().getStaff().getStaff_id());
 		return sysMessageBo.findSysMessage(param);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/findStaffSysMessageCount")
+	public Map findStaffSysMessageCount(@RequestParam Map param){
+		param.put("staff_id", SessionUtil.getStaffUser().getStaff().getStaff_id());
+		return sysMessageBo.findStaffSysMessageCount(param);
 	}
 	
 	@ResponseBody
