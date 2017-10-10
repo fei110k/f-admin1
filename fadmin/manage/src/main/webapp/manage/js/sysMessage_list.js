@@ -19,11 +19,45 @@ function querySysMessage() {
 		},
 		columns:[
 			{name:"ID",data:"msg_id",hidden:true,},
-			{name:"标题",data:"msg_title"},
+			{name:"标题",data:"msg_title",dataformat:function(data,rowData){
+				var is_top = rowData.is_top;
+				var msg_state = rowData.msg_state;
+				var html = "";
+				if(msg_state == "1"){//1:未读 ; 2:已阅
+					html += "<strong class=\"c-blue\">"+data+"</strong>";
+				}else if(msg_state == "2"){//1:未读状态
+					html += data;
+				}
+				
+				if(is_top == "0"){   //0;置顶	;1:不置顶
+					html += "<span class=\"label label-danger radius ml-5\">" +
+								"<i class=\"Hui-iconfont\">&#xe684;</i>置顶" +
+							"</span>";
+				}
+				
+				html = "<a href='javascript:void(0);' onclick='queryMessageDetails(\""+rowData.msg_id+
+						"\",\""+rowData.msg_title+"\")'>"+html+"</a>";
+				return html;
+			}},
 			{name:"消息内容",data:"msg_content",hidden:true},
-			{name:"操作",data:""},
 		]
 	});
+}
+
+/**
+ * 查询消息详情
+ */
+function queryMessageDetails(msg_id,msg_title){
+	
+	var url = "/manage/sysMessage_query.jsp?msg_id="+msg_id;
+	
+	var index = layer.open({
+		title:msg_title,
+		area: [500+'px', 400 +'px'],
+		content:url,
+		type: 2,
+	});
+	layer.full(index);
 }
 
 function addSysMessage(){

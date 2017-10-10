@@ -197,12 +197,14 @@
 				if ((data == undefined || data == null) && defaultContent) {
 					data = defaultContent;
 				}
+				
+				if(data_code){
+					var values = Cache.get(data_code);
+					data = this.getAttrValue(values,data);
+				}
+				
 				if (typeof dataformat == "function") {
 					data = dataformat(data,rowData);
-				}
-				if(data_code){
-					var value = Cache.get(data_code);
-					data = this.getAttrValue(value,data);
 				}
 				var td_class = className?"class=\""+className+"\"":"";
 				data = data?data:"";

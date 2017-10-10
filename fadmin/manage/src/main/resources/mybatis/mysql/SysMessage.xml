@@ -11,11 +11,12 @@
 		  msg_title,
 		  msg_content,
 		  msg_type,
-		  receive_time,
+		  date_format(receive_time, '%Y-%c-%d %h:%i:%s') as receive_time,
 		  msg_state,
 		  msg_state_time,
 		  is_top,
-		  msg_url
+		  msg_url,
+		  (SELECT staff_name FROM sys_staff WHERE staff_id = receive_staff_id) receive_staff_name
 		FROM
 		  sys_message where receive_staff_id = #{staff_id}
 		<if test="msg_id != null and msg_id != '' ">
@@ -35,11 +36,13 @@
 		  msg_title,
 		  msg_content,
 		  msg_type,
-		  receive_time,
+		  date_format(receive_time, '%Y-%c-%d %h:%i:%s') as receive_time,
 		  msg_state,
 		  msg_state_time,
 		  is_top,
-		  msg_url
+		  msg_url,
+		  (SELECT staff_name FROM sys_staff WHERE staff_id = receive_staff_id) receive_staff_name,
+		  (SELECT staff_name FROM sys_staff WHERE staff_id = send_staff_id) send_staff_name
 		FROM sys_message 
 		where msg_id = #{msg_id}
 	</select>

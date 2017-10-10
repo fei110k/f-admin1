@@ -30,7 +30,9 @@ public class SysMessageBoImpl implements SysMessageBo{
 	
 	@Override
 	public Map findSysMessageById(Map param) {
-		// TODO Auto-generated method stub
+		Map req = daoUtils.getSqlSessionTemplate().selectOne("SysMessage.findSysMessageById", param);;
+		param.put("msg_state", "2");
+		daoUtils.getSqlSessionTemplate().selectOne("SysMessage.updateSysMessageById", param);
 		return daoUtils.getSqlSessionTemplate().selectOne("SysMessage.findSysMessageById", param);
 	}
 	
