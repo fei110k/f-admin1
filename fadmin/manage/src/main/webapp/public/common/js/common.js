@@ -84,4 +84,43 @@ $(function(){
 	if($("select[data_code]").fselect){
 		$("select[data_code]").fselect("joinAttrValues");
 	}
-})
+	//初始化layer的一些全局变量，比如出场动画
+	layer.config({
+		anim: 2,		//动画
+	});
+
+	//设置ajax请求的默认值
+	$.ajaxSetup({
+		//将所有后台错误，集中到此来进行展示
+		error:function (XMLHttpRequest, textStatus, errorThrown) {
+			var status = XMLHttpRequest.status;
+			var responseText = XMLHttpRequest.responseText;
+			var tipsHtml = "<div class=''>系统在请求服务器过程中出现异常"+status+",请联系系统管理员！</div>"
+			layer.alert(tipsHtml,{
+				type : 0,
+				title : '系统请求异常',
+				shade : 0,		//不用遮罩层
+				offset : 'rb',	//右下角
+				area : [ '300px', '175px' ],
+				//time:5000,
+				//maxmin:true,	//最大最小化按钮
+				icon: 5,
+				btn:['查看详细错误信息'],			//不要按钮
+				btn1:function(index, layero){
+					var index2 = layer.open({
+						type : 1,
+						title : '系统异常错误信息',
+						shade : 0,		//不用遮罩层
+						maxmin:true,	//最大最小化按钮
+						content:responseText
+					});
+					//最大化详细错误信息窗口
+					layer.full(index2);
+					//关闭当前提示窗口
+					layer.close(index);
+				}
+			});
+			
+		}
+	});
+});

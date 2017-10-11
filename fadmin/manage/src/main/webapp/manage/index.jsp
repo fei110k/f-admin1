@@ -23,6 +23,12 @@
 <link rel="stylesheet" type="text/css" href="/public/lib/H-ui.admin/static/h-ui.admin/skin/default/skin.css" id="skin" />
 <link rel="stylesheet" type="text/css" href="/public/lib/H-ui.admin/static/h-ui.admin/css/style.css" />
 
+<style type="text/css">
+/* 左侧菜单两边不留白 */
+.Hui-aside .menu_dropdown dd ul{padding: 3px 0px;}
+.Hui-aside .menu_dropdown dd li a{padding-left: 34px;}
+</style>
+
 <!-- 鬼畜抖动插件 -->
 <!-- <link rel="stylesheet" type="text/css" href="http://cdnjs.cloudflare.com/ajax/libs/csshake/1.5.2/csshake-default.min.css" /> -->
 
@@ -102,7 +108,7 @@
 </div>
 <!--_footer 作为公共模版分离出去-->
 <script type="text/javascript" src="/public/lib/H-ui.admin/lib/jquery/1.9.1/jquery.min.js"></script> 
-<script type="text/javascript" src="/public/lib/H-ui.admin/lib/layer/2.4/layer.js"></script>
+<script type="text/javascript" src="/public/lib/H-ui.admin/lib/layer/3.1.0/layer.js"></script>
 <script type="text/javascript" src="/public/lib/H-ui.admin/static/h-ui/js/H-ui.min.js"></script>
 <script type="text/javascript" src="/public/lib/H-ui.admin/static/h-ui.admin/js/H-ui.admin.js"></script> <!--/_footer 作为公共模版分离出去-->
 

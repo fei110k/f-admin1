@@ -55,7 +55,7 @@
 <div class="footer">Copyright <%=Consts.SYSTEM_NAME %> <%=Consts.SYSTEM_COPYRIGHT %></div>
 <script type="text/javascript" src="/public/lib/H-ui.admin/lib/jquery/1.9.1/jquery.min.js"></script> 
 <script type="text/javascript" src="/public/lib/H-ui.admin/static/h-ui/js/H-ui.min.js"></script> 
-<script type="text/javascript" src="/public/lib/H-ui.admin/lib/layer/2.4/layer.js"></script>
+<script type="text/javascript" src="/public/lib/H-ui.admin/lib/layer/3.1.0/layer.js"></script>
 <!--表单相关插件-->
 <script type="text/javascript" src="/public/lib/H-ui.admin/lib/jquery.validation/1.14.0/jquery.validate.js"></script> 
 <script type="text/javascript" src="/public/lib/H-ui.admin/lib/jquery.validation/1.14.0/validate-methods.js"></script> 
