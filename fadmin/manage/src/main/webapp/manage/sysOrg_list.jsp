@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="/base" prefix="base"%>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -7,20 +8,26 @@
 <!-- 树控件样式 -->
 <link rel="stylesheet" href="/public/lib/H-ui.admin/lib/zTree/v3/css/zTreeStyle/zTreeStyle.css" type="text/css">
 
-<title>菜单管理</title>
+<title>组织管理</title>
 </head>
 <body>
 <div>
 	<div class="cl pd-5 bg-1 bk-gray mt-20">
-		<a href="javascript:;" onclick="addSysOrg()" class="btn btn-primary radius">
-			<i class="Hui-iconfont">&#xe600;</i>新增
-		</a>
-		<a href="javascript:;" onclick="editSysOrg()" class="btn btn-success radius">
-			<i class="Hui-iconfont">&#xe60c;</i>修改
-		</a>
-		<a href="javascript:;" onclick="deleteSysOrg()" class="btn btn-danger radius">
-			<i class="Hui-iconfont">&#xe6e2;</i>删除
-		</a>
+		<base:button code="SYS_ORG_ADD">
+			<a href="javascript:;" onclick="addSysOrg()" class="btn btn-primary radius">
+				<i class="Hui-iconfont">&#xe600;</i>新增
+			</a>
+		</base:button>
+		<base:button code="SYS_ORG_EDIT">
+			<a href="javascript:;" onclick="editSysOrg()" class="btn btn-success radius">
+				<i class="Hui-iconfont">&#xe60c;</i>修改
+			</a>
+		</base:button>
+		<base:button code="SYS_ORG_DEL">
+			<a href="javascript:;" onclick="deleteSysOrg()" class="btn btn-danger radius">
+				<i class="Hui-iconfont">&#xe6e2;</i>删除
+			</a>
+        </base:button>
 		<span class="c-red">提示：请先选择一个组织再进行操作！</span>
 	</div>
 	<div class="cl">

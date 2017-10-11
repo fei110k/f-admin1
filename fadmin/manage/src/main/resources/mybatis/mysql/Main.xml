@@ -18,8 +18,8 @@
 	</select>
 	
 	<!-- 根据用户查询用户的菜单及按钮权限 -->
-	<select id="findSysStaffButton" resultType="com.dtf.admin.manage.vo.SysMenu" parameterType="String">
-		SELECT d.*
+	<select id="findSysStaffButton" resultType="String" parameterType="String">
+		SELECT DISTINCT d.btn_code
 			FROM sys_staff a ,sys_staff_role_rel b,sys_privilege_rel c,sys_button d
 			WHERE a.staff_code = #{staff_code}
 				AND a.status = '0' 

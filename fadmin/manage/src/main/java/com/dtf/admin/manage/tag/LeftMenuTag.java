@@ -14,8 +14,7 @@ import com.dtf.admin.manage.vo.StaffUser;
 import com.dtf.admin.manage.vo.SysMenu;
 
 
-public class RightMenuTag extends TagSupport{
-	
+public class LeftMenuTag extends TagSupport{
 	
 	
 	@Override
@@ -56,8 +55,6 @@ public class RightMenuTag extends TagSupport{
 		try {
 			out.print(htm);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-
 			e.printStackTrace();
 		}
 	}

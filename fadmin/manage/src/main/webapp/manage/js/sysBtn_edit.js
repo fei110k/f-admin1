@@ -44,8 +44,8 @@ function submitMenuForm(){
 	            url: '/SysButton/'+url+'.do', // 需要提交的 url
 	            success: function(data) { // data 保存提交后返回的数据，一般为 json 数据
 	            	if (data.code == '0000') {
-	            		window.parent.initMenuBtnTree();
 	            		alert(data.msg);
+	            		window.parent.initMenuBtnTree();
 					}else{
 						alert(data.msg);
 					}

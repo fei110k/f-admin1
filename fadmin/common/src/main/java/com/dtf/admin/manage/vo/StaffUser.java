@@ -9,7 +9,7 @@ public class StaffUser {
 	//用户所拥有的菜单权限
 	private List<SysMenu> menuList;
 	//用户所拥有的按钮权限
-	private List<SysButton> btnList;
+	private List<String> btnList;
 	
 	//用户能访问的子菜单url列表
 	private List<String> menuChildrenList;
@@ -30,11 +30,11 @@ public class StaffUser {
 		this.menuList = menuList;
 	}
 
-	public List<SysButton> getBtnList() {
+	public List<String> getBtnList() {
 		return btnList;
 	}
 
-	public void setBtnList(List<SysButton> btnList) {
+	public void setBtnList(List<String> btnList) {
 		this.btnList = btnList;
 	}
 

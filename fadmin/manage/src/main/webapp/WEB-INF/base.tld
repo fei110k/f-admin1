@@ -7,8 +7,19 @@
 	<short-name>base</short-name>
 	<uri>/base</uri>
 	<tag>
-		<name>rightMenu</name>
-		<tag-class>com.dtf.admin.manage.tag.RightMenuTag</tag-class>
+		<name>leftMenu</name>
+		<tag-class>com.dtf.admin.manage.tag.LeftMenuTag</tag-class>
 		<body-content>empty</body-content>
 	</tag>
+	<tag>
+		<name>button</name>
+		<tag-class>com.dtf.admin.manage.tag.ButtonAuthTag</tag-class>
+		<body-content>tagdependent</body-content>
+		<attribute>
+			<name>code</name>
+			<description>按钮编码</description>
+			<required>true</required>
+		</attribute>
+	</tag>
+	
 </taglib>
