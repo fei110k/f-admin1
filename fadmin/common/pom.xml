@@ -72,13 +72,26 @@
 			<version>1.2.9</version>
 		</dependency>
 
-		<!-- commons中的工具类 -->
+		<!-- commons中的工具类   开始 -->
 		<dependency>
 			<groupId>commons-net</groupId>
 			<artifactId>commons-net</artifactId>
 			<version>3.6</version>
 		</dependency>
-
+		<dependency>
+		    <groupId>org.antlr</groupId>
+		    <artifactId>stringtemplate</artifactId>
+		    <version>3.2.1</version>
+		</dependency>
+		<!-- commons中的工具类   结束 -->
+		
+		<!-- excel导出要用到模板类 -->
+		<dependency>
+		    <groupId>antlr</groupId>
+		    <artifactId>antlr</artifactId>
+		    <version>2.7.7</version>
+		</dependency>
+		
 		<!-- Bean工具类 -->
 		<dependency>
 			<groupId>commons-beanutils</groupId>
