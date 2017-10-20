@@ -53,7 +53,7 @@ public class ExcelBigFileCreateUtils {
 				dataList.add(m1);
 			}
 			//4.多次补入数据
-			for (int i = 0; i < 1; i++) {
+			for (int i = 0; i < 10; i++) {
 				exportUtils.appendData(dataList);
 			}
 			
@@ -72,7 +72,7 @@ public class ExcelBigFileCreateUtils {
 	//一个excel最多支持多少个sheet
 	private int maxSheetCount = 300;
 	//单sheet最大行数，office 2003是6万行，2007支持100万行
-	private int maxOneSheetCount = 60000;
+	private int maxOneSheetCount = 1000000;
 	
 	private String excelFilePath = null;
 	
