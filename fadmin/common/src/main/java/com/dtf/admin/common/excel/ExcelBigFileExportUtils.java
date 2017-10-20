@@ -13,27 +13,32 @@ import org.antlr.stringtemplate.StringTemplate;
 import org.antlr.stringtemplate.StringTemplateGroup;
 
 import com.dtf.admin.common.utils.MapUtils;
+import com.dtf.admin.common.utils.StringUtil;
 
 /**
  * excel导出功能工具类，可导出大数据量excel
  * 测试1800万数据导出，耗时742秒，12分钟左右，无出现内存爆掉的情况，但是文件太大，导致打不开
  * 测试1000万数据导出，耗时416秒，7分钟左右，无出现内存爆掉的情况，文件可以打开，但是花了好久时间
  * 测试100万数据导出，耗时43秒，无出现内存爆掉的情况，文件可以打开
+ * 
+ * 使用方法请参考main方法
+ * 
  * @author 飞不语
  *
  */
-public class ExcelExportUtils {
+public class ExcelBigFileExportUtils {
 	
 	public static void main(String[] args) {
 		//记录开始执行构建excel时间，便于最后展示生成excel总共花费的时间
 		long startTimne = System.currentTimeMillis();	
 		
-		ExcelExportUtils exportUtils = new ExcelExportUtils();
-		//1.设置第一列的标题及，后续取数据的code
-		exportUtils.setTitles(new String[]{"第一列title","第二列title","第三列title"},
-				new String[]{"code1","code2","code3"});
-		//2.设置文件存放位置
-		exportUtils.setExcelFilePath("D:/test.xls");
+		ExcelBigFileExportUtils exportUtils = new ExcelBigFileExportUtils(
+			//1.设置第一列的标题及，后续取数据的code
+			new String[]{"第一列title","第二列title","第三列title"},
+			new String[]{"code1","code2","code3"},
+			//2.设置文件存放位置
+			"D:/test.xls"
+		);
 		try {
 			//3.生成excel文件，及一些头部信息
 			exportUtils.start();
@@ -59,7 +64,9 @@ public class ExcelExportUtils {
 		}
 		
 	}
-	
+	public ExcelBigFileExportUtils(){
+		
+	}
 	
 	//一个excel最多支持多少个sheet
 	private int maxSheetCount = 300;
@@ -84,7 +91,7 @@ public class ExcelExportUtils {
 	//文件输入
 	private PrintWriter writer;
 	
-	public void setTitles(String[] titleNames,String[] titleCodes) {
+	public ExcelBigFileExportUtils(String[] titleNames,String[] titleCodes,String excelFilePath) {
 		
 		if (titleNames == null || titleNames.length == 0
 				|| titleCodes == null || titleCodes.length == 0) {
@@ -95,15 +102,16 @@ public class ExcelExportUtils {
 			throw new RuntimeException("titleCodes.length与titleNames.length必须一致！");
 		}
 		
+		if (StringUtil.isEmpty(excelFilePath)) {
+			throw new RuntimeException("excelFilePath不能为空，导出excel路径必须输入！");
+		}
+		
 		this.titleNames = titleNames;
 		this.titleCodes = titleCodes;
 		this.columnNum = titleNames.length;
-	}
-	
-	public void setExcelFilePath(String excelFilePath) {
 		this.excelFilePath = excelFilePath;
 	}
-
+	
 	public void checkBuild(){
 		if (excelFilePath == null) {
 			throw new RuntimeException("请先设置输出文件路径，例如：exportUtils.setExcelFilePath(\"D:/test.xls\");");
