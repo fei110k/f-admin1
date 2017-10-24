@@ -69,6 +69,9 @@ function changeVerifyCode() {
     document.getElementById("VerificationImage").src="/Verification.do?d="+time;//为了不让验证码缓存，为了安全起见，需要次次都刷新  
 }  
 $(function(){
+	if(window != window.top){
+		window.top.location.href = window.location.href;
+	}
 	$("#loginForm").validate({
 		rules:{
 			staff_code:{
