@@ -120,7 +120,7 @@ public class ExcelBigFileCreateUtils {
 		this.excelFilePath = excelFilePath;
 	}
 	
-	public void checkBuild(){
+	private void checkBuild(){
 		if (excelFilePath == null) {
 			throw new RuntimeException("请先设置输出文件路径，例如：exportUtils.setExcelFilePath(\"D:/test.xls\");");
 		}
